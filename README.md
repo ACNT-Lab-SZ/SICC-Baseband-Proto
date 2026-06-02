@@ -34,7 +34,6 @@ SICC Baseband Prototype 是一个面向星地/USRP 基带链路验证的原型�
 ## Main Components
 
 - `source/python/UI_NEW/main.py`：当前主要 PySide6 UI，集成星地可视化、业务选择、模型更新、离线 GPU pipeline 与 USRP 控制入口。
-- `source/python/UI_NEW/usrp_sync_task.py`：UI 触发 USRP 同步任务的辅助线程。
 - `source/python/UI_NEW/model_update.py`：遥感 AI 模型更新包生成、切片、manifest 与接收端部署逻辑。
 - `source/cpp_cuda/uhd_cpp/src/uhd_ldpc_ofdm_link.cpp`：UHD LDPC-OFDM 收发链路核心实现。
 - `source/cpp_cuda/uhd_cpp/src/gpu_ofdm_pipeline.cu`：GPU OFDM pipeline。
