@@ -1,0 +1,1 @@
+{"confidence_threshold":0.25,"input_size":[640,640],"model_format":"pytorch_pt","nms_threshold":0.45,"task_id":"earthquake"}

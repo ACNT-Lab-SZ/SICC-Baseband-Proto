@@ -1,0 +1,30 @@
+% Requires \usepackage{booktabs}
+\begin{table}[htbp]
+\centering
+\caption{YOLO training performance}
+\begin{tabular}{lrrrrr}
+\toprule
+Task & Epochs & Best mAP50 & Best mAP50-95 & Precision & Recall \\
+\midrule
+earthquake damage detection & 50 & 0.8562 & 0.8562 & 0.8845 & 0.7942 \\
+maritime ship detection & 50 & 0.9861 & 0.7024 & 0.9627 & 0.9453 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{GPU direct roundtrip performance}
+\begin{tabular}{llrrrr}
+\toprule
+Task & Scheme & Frames & FPS & Avg payload KB & Detections \\
+\midrule
+VISO vehicle split inference & uniform & 120 & 13.0696 & 1700 & 5277 \\
+VISO vehicle split inference & roi-layered & 120 & 10.3915 & 907.87 & 5277 \\
+earthquake & roi-layered & 40 & 8.7896 & 1824.61 & 42 \\
+maritime_ship & roi-layered & 40 & 8.7775 & 442.99 & 88 \\
+flood & roi-layered & 20 & 4.6626 & 1423.1 & 112 \\
+flood & uniform & 20 & 5.4982 & 1700 & 112 \\
+\bottomrule
+\end{tabular}
+\end{table}

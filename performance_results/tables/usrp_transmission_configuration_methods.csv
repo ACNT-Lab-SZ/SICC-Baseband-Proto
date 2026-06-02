@@ -1,0 +1,5 @@
+"scenario","configuration_method","csv_files","runs","key_parameters"
+"Offline GPU simulated channel","Each run stores a per-frame channel gain trace and SNR trace. nominal_snr_db is inferred as snrDb - relativePowerDb.","118","59","frame, relativePowerDb, snrDb, inferred nominal_snr_db"
+"Offline GPU predicted power","Prediction-only relative power traces for early UI/offline GPU runs.","4","4","frame, relativePowerDb"
+"Real USRP gated GPU link","Single measured radio profile uses TX/RX gains plus OFDM/FEC/modulation parameters in usrp_gain_frame_metrics.csv.","2","1","tx_gain_db, rx_gain_db, sample_rate, num_symbols, active_sc, DVB-S2 rate 5/6, QPSK"
+"Decoder AWGN","Decoder-only AWGN point uses fixed SNR and reports BER/FER/throughput.","1","1","snr_db, codewords, BER, FER, info_Mbps, cw_per_s"

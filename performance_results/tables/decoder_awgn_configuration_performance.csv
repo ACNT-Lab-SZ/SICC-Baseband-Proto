@@ -1,0 +1,2 @@
+"decoder","snr_db","codewords","bit_errors","frame_errors","ber","fer","info_mbps","coded_mbps","cw_per_s","used_osd","decode_seconds","source"
+"osd-only","3","1000","14","1","0.00021875","0.001","24.254","48.509","378974.495","1000","0.003","data\datasets\portable\usrp_video_link_portable_20260513\logs\decoder_only_awgn\osd-only_3_3dB.csv"

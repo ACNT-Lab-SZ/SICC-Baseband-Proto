@@ -1,0 +1,48 @@
+{
+  "task": "remote_sensing_object_detection",
+  "model": "data/models/Ai_process_V2/models/viso_yolov8n_car_best.pt",
+  "split_layer": 22,
+  "frames": 1,
+  "detections": 48,
+  "class_counts": {
+    "car": 48
+  },
+  "confidence": {
+    "avg": 0.5465589171896378,
+    "max": 0.7421475648880005,
+    "min": 0.2500096559524536
+  },
+  "per_frame": [
+    {
+      "frame_id": 0,
+      "detections": 48
+    }
+  ],
+  "tracks": {
+    "enabled": true,
+    "count": 48
+  },
+  "link_payload": {
+    "tx_bitstream": "generated/Ai_process_V2/logs/baseband\\rs_ai_tx_features.rsbf",
+    "rx_bitstream": "generated/Ai_process_V2/logs/baseband\\rs_ai_rx_features.rsbf",
+    "tx_bytes": 982791,
+    "rx_bytes": 982791,
+    "byte_delta": 0
+  },
+  "assets": {
+    "annotated_frames": [
+      "generated/Ai_process_V2/logs/baseband\\ui_assets\\annotated\\frame_000000.jpg"
+    ],
+    "annotated_video": "generated/Ai_process_V2/logs/baseband\\ui_assets\\annotated.mp4",
+    "detections_json": "generated/Ai_process_V2/logs/baseband\\rs_ai_detections.json"
+  },
+  "evaluation": {
+    "iou_threshold": 0.5,
+    "true_positive": 0,
+    "false_positive": 48,
+    "false_negative": 11216,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  }
+}

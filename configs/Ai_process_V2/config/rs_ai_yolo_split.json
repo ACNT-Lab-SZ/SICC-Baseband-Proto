@@ -1,0 +1,24 @@
+{
+  "name": "remote-sensing-yolo-feature-link",
+  "bitstream_format": "RSBF-v1",
+  "model": {
+    "family": "ultralytics-yolo",
+    "weights": "models/remote_sensing_yolo.pt",
+    "split_layer": 22,
+    "image_size": 640,
+    "tensor_codec": "int8",
+    "device": "cuda:0"
+  },
+  "link": {
+    "traffic": "file",
+    "tx_bitstream": "logs/rs_ai_tx_features.rsbf",
+    "rx_bitstream": "logs/rs_ai_rx_features.rsbf",
+    "detections_json": "logs/rs_ai_detections.json"
+  },
+  "detection": {
+    "confidence": 0.25,
+    "iou": 0.45,
+    "max_det": 300
+  }
+}
+

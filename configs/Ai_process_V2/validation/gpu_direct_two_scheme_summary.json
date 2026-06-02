@@ -1,0 +1,23 @@
+{
+  "uniform": {
+    "frames": 120,
+    "fps": 13.06958987266409,
+    "avg_payload_nbytes": 1740800.0,
+    "detections": 5277,
+    "roundtrip_json": "logs/gpu_direct_two_scheme/uniform_roundtrip.json",
+    "manifest_json": "logs/gpu_direct_two_scheme/uniform_manifest.json"
+  },
+  "roi-layered": {
+    "frames": 120,
+    "fps": 10.391507725986834,
+    "avg_payload_nbytes": 929654.4,
+    "detections": 5277,
+    "roundtrip_json": "logs/gpu_direct_two_scheme/roi-layered_roundtrip.json",
+    "manifest_json": "logs/gpu_direct_two_scheme/roi-layered_manifest.json"
+  },
+  "comparison": {
+    "roi_layered_payload_ratio": 0.5340386029411764,
+    "roi_layered_payload_saving": 0.46596139705882356,
+    "detection_delta": 0
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "task_id": "maritime_ship",
+  "input_size": [
+    640,
+    640
+  ],
+  "confidence_threshold": 0.25,
+  "nms_threshold": 0.45,
+  "model_format": "pytorch_pt"
+}

@@ -1,0 +1,5 @@
+"run","samples","mean_db","min_db","max_db","source"
+"ui_offline_gpu_20260531_193202","181","-3.3519390220994456","-15.404493","3.209366","data\datasets\transmission_file\Rx\ui_offline_gpu_20260531_193202\predicted_relative_power_trace_db.csv"
+"ui_offline_gpu_20260531_194833","22","0.8569606363636363","-1.040243","2.682329","data\datasets\transmission_file\Rx\ui_offline_gpu_20260531_194833\predicted_relative_power_trace_db.csv"
+"ui_offline_gpu_20260531_194907","74","-7.1339950270270265","-23.603724","2.620896","data\datasets\transmission_file\Rx\ui_offline_gpu_20260531_194907\predicted_relative_power_trace_db.csv"
+"ui_offline_gpu_20260531_194943","126","-12.946494888888893","-24","2.620896","data\datasets\transmission_file\Rx\ui_offline_gpu_20260531_194943\predicted_relative_power_trace_db.csv"

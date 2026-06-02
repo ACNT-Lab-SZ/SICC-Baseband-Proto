@@ -1,0 +1,11 @@
+{
+  "dataset": "VISO",
+  "source_kind": "video",
+  "source_path": "Ai_process_V2\\sample_data\\viso_002\\002.avi",
+  "annotation": "Ai_process_V2\\sample_data\\viso_002\\gt2.txt",
+  "model": "data/models/Ai_process_V2/models/viso_yolov8n_car_best.pt",
+  "split_layer": 22,
+  "bitstream": "generated/Ai_process_V2/logs/baseband\\rs_ai_tx_features.rsbf",
+  "max_frames": 30,
+  "resource_mode": "roi_layered_v1"
+}

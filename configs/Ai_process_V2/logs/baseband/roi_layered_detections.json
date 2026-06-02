@@ -1,0 +1,599 @@
+{
+  "input_bitstream": "generated/Ai_process_V2/logs/baseband\\roi_layered_rx.rsbf",
+  "model": "data/models/Ai_process_V2/models/viso_yolov8n_car_best.pt",
+  "split_layer": 22,
+  "frames": [
+    {
+      "frame_id": 0,
+      "pts_ms": 0.0,
+      "source_size": [
+        1024,
+        1024
+      ],
+      "detections": [
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.7421475648880005,
+          "xyxy": [
+            498.0,
+            523.0,
+            504.0,
+            530.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.7302830815315247,
+          "xyxy": [
+            909.0,
+            722.0,
+            917.0,
+            729.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.7231565713882446,
+          "xyxy": [
+            666.0,
+            794.0,
+            674.0,
+            801.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.7159579992294312,
+          "xyxy": [
+            520.0,
+            516.0,
+            527.0,
+            525.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.7134475708007812,
+          "xyxy": [
+            490.0,
+            449.0,
+            495.0,
+            456.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.7109948992729187,
+          "xyxy": [
+            519.0,
+            879.0,
+            526.0,
+            885.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.7105289101600647,
+          "xyxy": [
+            934.0,
+            669.0,
+            942.0,
+            676.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.703169584274292,
+          "xyxy": [
+            601.0,
+            709.0,
+            608.0,
+            716.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6804298162460327,
+          "xyxy": [
+            343.0,
+            966.0,
+            356.0,
+            978.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6770012378692627,
+          "xyxy": [
+            981.0,
+            652.0,
+            990.0,
+            659.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6660981178283691,
+          "xyxy": [
+            524.0,
+            779.0,
+            531.0,
+            786.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6613525748252869,
+          "xyxy": [
+            499.0,
+            496.0,
+            504.0,
+            503.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6577210426330566,
+          "xyxy": [
+            851.0,
+            710.0,
+            860.0,
+            717.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6478855013847351,
+          "xyxy": [
+            544.0,
+            761.0,
+            552.0,
+            769.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6477159261703491,
+          "xyxy": [
+            1014.0,
+            655.0,
+            1022.0,
+            663.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6423317193984985,
+          "xyxy": [
+            479.0,
+            896.0,
+            486.0,
+            902.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.632719099521637,
+          "xyxy": [
+            504.0,
+            886.0,
+            511.0,
+            892.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6322324872016907,
+          "xyxy": [
+            495.0,
+            474.0,
+            501.0,
+            482.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6242275238037109,
+          "xyxy": [
+            677.0,
+            782.0,
+            685.0,
+            789.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6123126745223999,
+          "xyxy": [
+            591.0,
+            954.0,
+            596.0,
+            961.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.6072590351104736,
+          "xyxy": [
+            816.0,
+            800.0,
+            826.0,
+            807.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.5884342193603516,
+          "xyxy": [
+            582.0,
+            924.0,
+            590.0,
+            931.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.5877289175987244,
+          "xyxy": [
+            595.0,
+            838.0,
+            604.0,
+            844.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.5494399666786194,
+          "xyxy": [
+            475.0,
+            1016.0,
+            482.0,
+            1023.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.5267017483711243,
+          "xyxy": [
+            899.0,
+            688.0,
+            907.0,
+            698.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.5255528688430786,
+          "xyxy": [
+            378.0,
+            971.0,
+            386.0,
+            979.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.5131691098213196,
+          "xyxy": [
+            390.0,
+            941.0,
+            398.0,
+            945.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.49574193358421326,
+          "xyxy": [
+            605.0,
+            941.0,
+            610.0,
+            947.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.4906621277332306,
+          "xyxy": [
+            402.0,
+            934.0,
+            408.0,
+            941.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.4887368679046631,
+          "xyxy": [
+            423.0,
+            928.0,
+            429.0,
+            934.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.48622000217437744,
+          "xyxy": [
+            743.0,
+            928.0,
+            749.0,
+            933.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.4826849102973938,
+          "xyxy": [
+            175.0,
+            167.0,
+            187.0,
+            174.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.47676143050193787,
+          "xyxy": [
+            411.0,
+            103.0,
+            418.0,
+            113.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.47053512930870056,
+          "xyxy": [
+            595.0,
+            869.0,
+            602.0,
+            877.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.46517765522003174,
+          "xyxy": [
+            557.0,
+            838.0,
+            567.0,
+            845.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.4610346853733063,
+          "xyxy": [
+            807.0,
+            50.0,
+            813.0,
+            58.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.44576725363731384,
+          "xyxy": [
+            551.0,
+            889.0,
+            557.0,
+            895.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.4389254152774811,
+          "xyxy": [
+            63.0,
+            101.0,
+            71.0,
+            109.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.42503365874290466,
+          "xyxy": [
+            704.0,
+            787.0,
+            711.0,
+            797.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.42467620968818665,
+          "xyxy": [
+            506.0,
+            429.0,
+            514.0,
+            439.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.42218446731567383,
+          "xyxy": [
+            173.0,
+            604.0,
+            177.0,
+            610.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.4186500310897827,
+          "xyxy": [
+            845.0,
+            736.0,
+            852.0,
+            746.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.4153038263320923,
+          "xyxy": [
+            581.0,
+            842.0,
+            587.0,
+            851.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.33444178104400635,
+          "xyxy": [
+            928.0,
+            710.0,
+            936.0,
+            716.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.329336941242218,
+          "xyxy": [
+            557.0,
+            858.0,
+            565.0,
+            864.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.30757856369018555,
+          "xyxy": [
+            454.0,
+            197.0,
+            460.0,
+            205.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.2753657102584839,
+          "xyxy": [
+            957.0,
+            659.0,
+            966.0,
+            667.0
+          ]
+        },
+        {
+          "frame_id": 0,
+          "class_id": 0,
+          "class_name": "car",
+          "confidence": 0.2500096559524536,
+          "xyxy": [
+            747.0,
+            786.0,
+            754.0,
+            791.0
+          ]
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "frames": 1,
+    "detections": 48,
+    "fps": 3.5185490602363148
+  },
+  "resource_mode": "roi_layered_v1"
+}

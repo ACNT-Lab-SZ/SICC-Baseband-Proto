@@ -1,0 +1,1259 @@
+{
+  "summary": {
+    "protocol": "rs-ai-gpu-direct-v1",
+    "scheme": "roi-layered",
+    "frames": 40,
+    "fps": 8.777530731425667,
+    "avg_payload_nbytes": 453619.2
+  },
+  "frames": [
+    {
+      "frame_id": 0,
+      "pts_ms": 0.0,
+      "payload_nbytes": 260720,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8462420701980591,
+          "xyxy": [
+            211.0,
+            152.0,
+            261.0,
+            167.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 1,
+      "pts_ms": 1000.0,
+      "payload_nbytes": 406256,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.47561365365982056,
+          "xyxy": [
+            191.0,
+            130.0,
+            324.0,
+            154.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 2,
+      "pts_ms": 2000.0,
+      "payload_nbytes": 362096,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.848962664604187,
+          "xyxy": [
+            251.0,
+            39.0,
+            265.0,
+            74.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8385227918624878,
+          "xyxy": [
+            168.0,
+            227.0,
+            179.0,
+            257.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 3,
+      "pts_ms": 3000.0,
+      "payload_nbytes": 304240,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7911767959594727,
+          "xyxy": [
+            157.0,
+            38.0,
+            178.0,
+            103.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 4,
+      "pts_ms": 4000.0,
+      "payload_nbytes": 509040,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8632811903953552,
+          "xyxy": [
+            161.0,
+            259.0,
+            176.0,
+            288.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8614969849586487,
+          "xyxy": [
+            52.0,
+            138.0,
+            66.0,
+            169.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8136103749275208,
+          "xyxy": [
+            259.0,
+            70.0,
+            272.0,
+            100.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 5,
+      "pts_ms": 5000.0,
+      "payload_nbytes": 398704,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8333878517150879,
+          "xyxy": [
+            147.0,
+            129.0,
+            275.0,
+            161.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 6,
+      "pts_ms": 6000.0,
+      "payload_nbytes": 403952,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8497884273529053,
+          "xyxy": [
+            229.0,
+            247.0,
+            246.0,
+            286.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.841551661491394,
+          "xyxy": [
+            284.0,
+            139.0,
+            305.0,
+            179.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 7,
+      "pts_ms": 7000.0,
+      "payload_nbytes": 343408,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7209404706954956,
+          "xyxy": [
+            213.0,
+            104.0,
+            244.0,
+            180.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 8,
+      "pts_ms": 8000.0,
+      "payload_nbytes": 385264,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.6309909224510193,
+          "xyxy": [
+            175.0,
+            89.0,
+            203.0,
+            195.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 9,
+      "pts_ms": 9000.0,
+      "payload_nbytes": 425072,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8100255131721497,
+          "xyxy": [
+            145.0,
+            44.0,
+            165.0,
+            89.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7832794189453125,
+          "xyxy": [
+            320.0,
+            249.0,
+            341.0,
+            296.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 10,
+      "pts_ms": 10000.0,
+      "payload_nbytes": 295408,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8184520602226257,
+          "xyxy": [
+            154.0,
+            95.0,
+            215.0,
+            113.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 11,
+      "pts_ms": 11000.0,
+      "payload_nbytes": 378224,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8094896078109741,
+          "xyxy": [
+            64.0,
+            71.0,
+            151.0,
+            98.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 12,
+      "pts_ms": 12000.0,
+      "payload_nbytes": 395504,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8255652189254761,
+          "xyxy": [
+            87.0,
+            94.0,
+            97.0,
+            122.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8252956867218018,
+          "xyxy": [
+            284.0,
+            67.0,
+            295.0,
+            94.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 13,
+      "pts_ms": 13000.0,
+      "payload_nbytes": 524400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8791574835777283,
+          "xyxy": [
+            163.0,
+            89.0,
+            196.0,
+            179.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8170778155326843,
+          "xyxy": [
+            330.0,
+            199.0,
+            343.0,
+            215.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 14,
+      "pts_ms": 14000.0,
+      "payload_nbytes": 481904,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8681768774986267,
+          "xyxy": [
+            177.0,
+            214.0,
+            200.0,
+            264.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8336049318313599,
+          "xyxy": [
+            122.0,
+            42.0,
+            141.0,
+            93.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 15,
+      "pts_ms": 15000.0,
+      "payload_nbytes": 398704,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8519551753997803,
+          "xyxy": [
+            117.0,
+            114.0,
+            152.0,
+            205.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 16,
+      "pts_ms": 16000.0,
+      "payload_nbytes": 326256,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8288816213607788,
+          "xyxy": [
+            201.0,
+            72.0,
+            224.0,
+            145.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 17,
+      "pts_ms": 17000.0,
+      "payload_nbytes": 330352,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8531874418258667,
+          "xyxy": [
+            40.0,
+            74.0,
+            62.0,
+            145.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 18,
+      "pts_ms": 18000.0,
+      "payload_nbytes": 670704,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8366218209266663,
+          "xyxy": [
+            338.0,
+            272.0,
+            350.0,
+            296.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8306644558906555,
+          "xyxy": [
+            96.0,
+            244.0,
+            108.0,
+            273.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8136356472969055,
+          "xyxy": [
+            251.0,
+            169.0,
+            262.0,
+            192.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.6653454899787903,
+          "xyxy": [
+            416.0,
+            109.0,
+            426.0,
+            129.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.6639910340309143,
+          "xyxy": [
+            108.0,
+            15.0,
+            121.0,
+            38.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 19,
+      "pts_ms": 19000.0,
+      "payload_nbytes": 490864,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8497287631034851,
+          "xyxy": [
+            137.0,
+            233.0,
+            149.0,
+            258.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8450230360031128,
+          "xyxy": [
+            50.0,
+            131.0,
+            61.0,
+            154.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.746020495891571,
+          "xyxy": [
+            215.0,
+            71.0,
+            225.0,
+            96.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 20,
+      "pts_ms": 20000.0,
+      "payload_nbytes": 375024,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.835189163684845,
+          "xyxy": [
+            263.0,
+            107.0,
+            274.0,
+            128.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7752758264541626,
+          "xyxy": [
+            65.0,
+            119.0,
+            75.0,
+            156.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 21,
+      "pts_ms": 21000.0,
+      "payload_nbytes": 723184,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8547236919403076,
+          "xyxy": [
+            287.0,
+            132.0,
+            299.0,
+            157.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8387209177017212,
+          "xyxy": [
+            46.0,
+            103.0,
+            57.0,
+            134.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8333020806312561,
+          "xyxy": [
+            168.0,
+            259.0,
+            184.0,
+            302.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8319587111473083,
+          "xyxy": [
+            201.0,
+            26.0,
+            211.0,
+            52.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7336024641990662,
+          "xyxy": [
+            14.0,
+            234.0,
+            28.0,
+            280.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 22,
+      "pts_ms": 22000.0,
+      "payload_nbytes": 606704,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.877895176410675,
+          "xyxy": [
+            265.0,
+            195.0,
+            277.0,
+            220.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8497262597084045,
+          "xyxy": [
+            24.0,
+            166.0,
+            35.0,
+            197.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8263765573501587,
+          "xyxy": [
+            179.0,
+            90.0,
+            189.0,
+            115.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7532969117164612,
+          "xyxy": [
+            343.0,
+            24.0,
+            353.0,
+            53.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 23,
+      "pts_ms": 23000.0,
+      "payload_nbytes": 679024,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8733682632446289,
+          "xyxy": [
+            273.0,
+            268.0,
+            285.0,
+            293.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8268734216690063,
+          "xyxy": [
+            187.0,
+            163.0,
+            197.0,
+            188.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8118625283241272,
+          "xyxy": [
+            45.0,
+            13.0,
+            55.0,
+            33.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8082654476165771,
+          "xyxy": [
+            32.0,
+            238.0,
+            42.0,
+            269.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7154727578163147,
+          "xyxy": [
+            351.0,
+            96.0,
+            361.0,
+            126.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 24,
+      "pts_ms": 24000.0,
+      "payload_nbytes": 478192,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8547232747077942,
+          "xyxy": [
+            171.0,
+            115.0,
+            183.0,
+            141.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8416997790336609,
+          "xyxy": [
+            85.0,
+            13.0,
+            95.0,
+            36.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8057332634925842,
+          "xyxy": [
+            51.0,
+            241.0,
+            67.0,
+            287.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 25,
+      "pts_ms": 25000.0,
+      "payload_nbytes": 634608,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.849495530128479,
+          "xyxy": [
+            254.0,
+            257.0,
+            266.0,
+            281.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8247165679931641,
+          "xyxy": [
+            167.0,
+            153.0,
+            178.0,
+            177.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8213516473770142,
+          "xyxy": [
+            13.0,
+            228.0,
+            24.0,
+            259.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7570412755012512,
+          "xyxy": [
+            26.0,
+            2.0,
+            36.0,
+            22.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7103195190429688,
+          "xyxy": [
+            332.0,
+            86.0,
+            343.0,
+            115.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 26,
+      "pts_ms": 26000.0,
+      "payload_nbytes": 503280,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8751766681671143,
+          "xyxy": [
+            16.0,
+            100.0,
+            36.0,
+            113.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8587961196899414,
+          "xyxy": [
+            284.0,
+            132.0,
+            296.0,
+            159.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7643741369247437,
+          "xyxy": [
+            257.0,
+            193.0,
+            264.0,
+            207.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.23290349543094635,
+          "xyxy": [
+            31.0,
+            69.0,
+            38.0,
+            73.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 27,
+      "pts_ms": 27000.0,
+      "payload_nbytes": 689776,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8556175827980042,
+          "xyxy": [
+            341.0,
+            174.0,
+            354.0,
+            202.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8530040979385376,
+          "xyxy": [
+            180.0,
+            76.0,
+            191.0,
+            102.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8281809687614441,
+          "xyxy": [
+            315.0,
+            89.0,
+            326.0,
+            113.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7752766609191895,
+          "xyxy": [
+            152.0,
+            136.0,
+            159.0,
+            151.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 28,
+      "pts_ms": 28000.0,
+      "payload_nbytes": 658032,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.5308517217636108,
+          "xyxy": [
+            214.0,
+            190.0,
+            545.0,
+            301.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 29,
+      "pts_ms": 29000.0,
+      "payload_nbytes": 486384,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8814265727996826,
+          "xyxy": [
+            60.0,
+            101.0,
+            218.0,
+            150.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.5756670832633972,
+          "xyxy": [
+            0.0,
+            134.0,
+            33.0,
+            168.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 30,
+      "pts_ms": 30000.0,
+      "payload_nbytes": 437744,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8703476190567017,
+          "xyxy": [
+            334.0,
+            442.0,
+            365.0,
+            462.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8534654974937439,
+          "xyxy": [
+            246.0,
+            17.0,
+            269.0,
+            29.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7858192324638367,
+          "xyxy": [
+            79.0,
+            212.0,
+            95.0,
+            222.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.6904029846191406,
+          "xyxy": [
+            420.0,
+            4.0,
+            428.0,
+            14.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 31,
+      "pts_ms": 31000.0,
+      "payload_nbytes": 284272,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8597210645675659,
+          "xyxy": [
+            95.0,
+            71.0,
+            144.0,
+            92.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 32,
+      "pts_ms": 32000.0,
+      "payload_nbytes": 450416,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.861207127571106,
+          "xyxy": [
+            169.0,
+            75.0,
+            211.0,
+            226.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 33,
+      "pts_ms": 33000.0,
+      "payload_nbytes": 659696,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8461048007011414,
+          "xyxy": [
+            350.0,
+            92.0,
+            361.0,
+            120.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8396462202072144,
+          "xyxy": [
+            94.0,
+            28.0,
+            109.0,
+            71.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7719402313232422,
+          "xyxy": [
+            345.0,
+            239.0,
+            353.0,
+            254.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.7539269328117371,
+          "xyxy": [
+            230.0,
+            248.0,
+            238.0,
+            270.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.48335179686546326,
+          "xyxy": [
+            427.0,
+            328.0,
+            434.0,
+            344.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 34,
+      "pts_ms": 34000.0,
+      "payload_nbytes": 331888,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8920563459396362,
+          "xyxy": [
+            59.0,
+            120.0,
+            92.0,
+            151.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 35,
+      "pts_ms": 35000.0,
+      "payload_nbytes": 483696,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8617135882377625,
+          "xyxy": [
+            363.0,
+            106.0,
+            412.0,
+            283.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 36,
+      "pts_ms": 36000.0,
+      "payload_nbytes": 475504,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8803827166557312,
+          "xyxy": [
+            67.0,
+            126.0,
+            115.0,
+            305.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 37,
+      "pts_ms": 37000.0,
+      "payload_nbytes": 270960,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.80329829454422,
+          "xyxy": [
+            161.0,
+            56.0,
+            179.0,
+            126.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 38,
+      "pts_ms": 38000.0,
+      "payload_nbytes": 472304,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8538939356803894,
+          "xyxy": [
+            269.0,
+            372.0,
+            287.0,
+            414.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8513820767402649,
+          "xyxy": [
+            304.0,
+            152.0,
+            317.0,
+            185.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.8295354247093201,
+          "xyxy": [
+            366.0,
+            20.0,
+            390.0,
+            73.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 39,
+      "pts_ms": 39000.0,
+      "payload_nbytes": 353008,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "ship",
+          "confidence": 0.3597078323364258,
+          "xyxy": [
+            0.0,
+            85.0,
+            56.0,
+            106.0
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+
+
+程序开始时间：20-Oct-2024 12:19:57 
+N = 80,  k = 40,  conste_name = BPSK  
+max_iter = 2,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:21:19 
+N = 80,  k = 40,  conste_name = BPSK  
+max_iter = 2,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:22:42 
+N = 80,  k = 40,  conste_name = BPSK  
+max_iter = 2,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:24:56 
+N = 80,  k = 40,  conste_name = BPSK  
+max_iter = 2,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:25:35 
+N = 80,  k = 40,  conste_name = BPSK  
+max_iter = 2,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:25:51 
+N = 80,  k = 40,  conste_name = BPSK  
+max_iter = 2,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:26:45 
+N = 80,  k = 40,  conste_name = BPSK  
+max_iter = 2,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks

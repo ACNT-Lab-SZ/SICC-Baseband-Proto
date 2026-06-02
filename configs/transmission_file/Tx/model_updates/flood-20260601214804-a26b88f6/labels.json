@@ -1,0 +1,6 @@
+{
+  "task_id": "flood",
+  "classes": [
+    "flood_water"
+  ]
+}

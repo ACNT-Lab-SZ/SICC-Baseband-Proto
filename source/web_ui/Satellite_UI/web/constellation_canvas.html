@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Qianfan NTN Canvas View</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020617;
+      font-family: Consolas, "Microsoft YaHei", monospace;
+      color: #dbeafe;
+    }
+    #scene {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: radial-gradient(circle at 50% 42%, #07182d 0%, #020617 68%);
+    }
+    .hud {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: stretch;
+      pointer-events: none;
+    }
+    .card {
+      background: rgba(2, 8, 23, 0.76);
+      border: 1px solid rgba(56, 189, 248, 0.42);
+      border-radius: 6px;
+      padding: 8px 10px;
+      box-shadow: 0 0 18px rgba(34, 211, 238, 0.12);
+    }
+    .title { color: #67e8f9; font-weight: 800; font-size: 13px; white-space: nowrap; }
+    .sub { color: #cbd5e1; font-size: 11px; margin-top: 4px; max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .stats { display: grid; grid-template-columns: repeat(3, 38px); gap: 5px; margin-top: 7px; }
+    .stat { border: 1px solid rgba(148, 163, 184, 0.28); border-radius: 5px; padding: 4px 2px; text-align: center; }
+    .label { color: #94a3b8; font-size: 10px; }
+    .value { color: #f8fafc; font-weight: 800; font-size: 13px; margin-top: 2px; }
+    .links { min-width: 225px; max-width: 270px; }
+    .link-row { color: #86efac; font-size: 11px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .offline { color: #fb7185; }
+  </style>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <div class="hud">
+    <div class="card">
+      <div class="title"><span id="dot" style="color:#f59e0b">●</span> Qianfan NTN</div>
+      <div class="sub" id="summary">Awaiting MATLAB state...</div>
+      <div class="stats">
+        <div class="stat"><div class="label">SAT</div><div class="value" id="satCount">0</div></div>
+        <div class="stat"><div class="label">LINK</div><div class="value" id="linkCount">0</div></div>
+        <div class="stat"><div class="label">MODE</div><div class="value">2D</div></div>
+      </div>
+    </div>
+    <div class="card links" id="links"><div class="link-row offline">No active MATLAB link</div></div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("scene");
+    const ctx = canvas.getContext("2d");
+    const summaryEl = document.getElementById("summary");
+    const satCountEl = document.getElementById("satCount");
+    const linkCountEl = document.getElementById("linkCount");
+    const linksEl = document.getElementById("links");
+    const dotEl = document.getElementById("dot");
+    const DEG = Math.PI / 180;
+    let liveState = null;
+    let lastStateMs = 0;
+    let rotation = -70;
+
+    function normalizeArray(value) {
+      if (!value) return [];
+      return Array.isArray(value) ? value : [value];
+    }
+
+    function wrapLon(lon) {
+      return ((((Number(lon) || 0) + 180) % 360) + 360) % 360 - 180;
+    }
+
+    function buildPreviewState() {
+      const now = performance.now() * 0.00008;
+      const sats = [];
+      for (let i = 0; i < 48; i++) {
+        sats.push({
+          name: `QIANFAN-${i + 1}`,
+          lat: 58 * Math.sin(now + i * 0.73),
+          lon: wrapLon(i * 29 + now * 180),
+          alt_m: 620000,
+          coverage_radius_deg: 18
+        });
+      }
+      return {
+        type: "preview",
+        satellites: sats,
+        groundStations: [{ name: "Shanghai-Lab", lat: 31.23, lon: 121.47 }],
+        servingLinks: []
+      };
+    }
+
+    function stateNow() {
+      return liveState || buildPreviewState();
+    }
+
+    function visibleLinks(state) {
+      const serving = normalizeArray(state.servingLinks).filter((link) => link.visible);
+      if (serving.length) return serving;
+      return normalizeArray(state.bestLinks).filter((link) => link.visible);
+    }
+
+    function resize() {
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      canvas.width = Math.floor(canvas.clientWidth * dpr);
+      canvas.height = Math.floor(canvas.clientHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    function project(lat, lon, radius) {
+      const lam = (wrapLon(lon - rotation)) * DEG;
+      const phi = lat * DEG;
+      const x = Math.cos(phi) * Math.sin(lam);
+      const y = Math.sin(phi);
+      const z = Math.cos(phi) * Math.cos(lam);
+      return {
+        x: canvas.clientWidth * 0.50 + radius * x,
+        y: canvas.clientHeight * 0.55 - radius * y,
+        front: z > -0.12,
+        depth: z
+      };
+    }
+
+    function coverageBoundary(sat) {
+      const radiusDeg = Number(sat.coverage_radius_deg || 18);
+      const lat1 = Number(sat.lat || 0) * DEG;
+      const lon1 = Number(sat.lon || 0) * DEG;
+      const d = radiusDeg * DEG;
+      const out = [];
+      for (let b = 0; b <= Math.PI * 2 + 0.01; b += Math.PI / 40) {
+        const lat = Math.asin(Math.sin(lat1) * Math.cos(d) + Math.cos(lat1) * Math.sin(d) * Math.cos(b));
+        const lon = lon1 + Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(lat1), Math.cos(d) - Math.sin(lat1) * Math.sin(lat));
+        out.push({ lat: lat / DEG, lon: lon / DEG });
+      }
+      return out;
+    }
+
+    function drawEarth(cx, cy, r) {
+      const g = ctx.createRadialGradient(cx - r * 0.35, cy - r * 0.30, r * 0.12, cx, cy, r);
+      g.addColorStop(0, "#60a5fa");
+      g.addColorStop(0.42, "#0f766e");
+      g.addColorStop(0.68, "#0f3b74");
+      g.addColorStop(1, "#020617");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.strokeStyle = "rgba(147,197,253,0.18)";
+      ctx.lineWidth = 1;
+      for (let lat = -60; lat <= 60; lat += 30) {
+        ctx.beginPath();
+        for (let lon = -180; lon <= 180; lon += 4) {
+          const p = project(lat, lon, r);
+          if (lon === -180) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+        }
+        ctx.stroke();
+      }
+      for (let lon = -150; lon <= 180; lon += 30) {
+        ctx.beginPath();
+        for (let lat = -80; lat <= 80; lat += 3) {
+          const p = project(lat, lon, r);
+          if (lat === -80) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+        }
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      ctx.strokeStyle = "rgba(125,211,252,0.38)";
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    function drawCoverage(sat, earthR) {
+      const points = coverageBoundary(sat).map((p) => project(p.lat, p.lon, earthR)).filter((p) => p.front);
+      if (points.length < 8) return;
+      ctx.beginPath();
+      points.forEach((p, idx) => idx ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y));
+      ctx.closePath();
+      ctx.fillStyle = "rgba(34,197,94,0.18)";
+      ctx.strokeStyle = "rgba(134,239,172,0.85)";
+      ctx.lineWidth = 1.2;
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    function render() {
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+      const earthR = Math.min(w, h) * 0.34;
+      const cx = w * 0.50;
+      const cy = h * 0.55;
+      if (!liveState) rotation += 0.12;
+
+      const state = stateNow();
+      const sats = normalizeArray(state.satellites);
+      const stations = normalizeArray(state.groundStations);
+      const links = visibleLinks(state);
+      const activeSatNames = new Set(links.map((l) => String(l.satellite || "")));
+      const activeGsNames = new Set(links.map((l) => String(l.groundStation || "")));
+
+      drawEarth(cx, cy, earthR);
+
+      for (const sat of sats) {
+        if (activeSatNames.has(String(sat.name || ""))) drawCoverage(sat, earthR);
+      }
+
+      for (const link of links) {
+        const sat = sats.find((s) => String(s.name || "") === String(link.satellite || ""));
+        const gs = stations.find((g) => String(g.name || "") === String(link.groundStation || ""));
+        if (!sat || !gs) continue;
+        const a = project(Number(gs.lat || 0), Number(gs.lon || 0), earthR);
+        const b = project(Number(sat.lat || 0), Number(sat.lon || 0), earthR * 1.17);
+        if (!a.front && !b.front) continue;
+        ctx.strokeStyle = "rgba(74,222,128,0.82)";
+        ctx.lineWidth = 1.4;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+
+      for (const gs of stations) {
+        const p = project(Number(gs.lat || 0), Number(gs.lon || 0), earthR);
+        if (!p.front) continue;
+        const active = activeGsNames.has(String(gs.name || ""));
+        ctx.fillStyle = active ? "#fbbf24" : "#fb7185";
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y - 8);
+        ctx.lineTo(p.x + 8, p.y + 7);
+        ctx.lineTo(p.x - 8, p.y + 7);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      for (const sat of sats) {
+        const p = project(Number(sat.lat || 0), Number(sat.lon || 0), earthR * 1.17);
+        if (!p.front) continue;
+        const active = activeSatNames.has(String(sat.name || ""));
+        ctx.fillStyle = active ? "#86efac" : "#22d3ee";
+        ctx.shadowColor = active ? "#86efac" : "#22d3ee";
+        ctx.shadowBlur = active ? 14 : 7;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, active ? 5 : 3.2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        if (active) {
+          ctx.fillStyle = "#d1fae5";
+          ctx.font = "11px Consolas";
+          ctx.fillText(String(sat.name || "SAT"), p.x + 7, p.y - 6);
+        }
+      }
+
+      satCountEl.textContent = String(sats.length);
+      linkCountEl.textContent = String(links.length);
+      dotEl.style.color = liveState ? "#22c55e" : "#f59e0b";
+      summaryEl.textContent = liveState ? (state.timestamp || state.time || "MATLAB live state") : "Preview orbit, waiting MATLAB...";
+      linksEl.innerHTML = "";
+      if (!links.length) {
+        linksEl.innerHTML = "<div class='link-row offline'>No active MATLAB link</div>";
+      } else {
+        links.slice(0, 5).forEach((link) => {
+          const row = document.createElement("div");
+          row.className = "link-row";
+          row.textContent = `${link.groundStation || "GS"} -> ${link.satellite || "SAT"}  El=${Number(link.elevation_deg || 0).toFixed(1)}deg`;
+          linksEl.appendChild(row);
+        });
+      }
+
+      requestAnimationFrame(render);
+    }
+
+    window.updateConstellation = function updateConstellation(nextState) {
+      liveState = nextState || null;
+      lastStateMs = performance.now();
+      rotation = -70;
+    };
+
+    requestAnimationFrame(render);
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "update_type": "model_update",
+  "update_id": "maritime_ship-20260601221656-33246b3f",
+  "task_id": "maritime_ship",
+  "task_name": "海上船只检测 SSDD",
+  "model_name": "security_maritime_ship_best.pt",
+  "model_format": "pytorch_pt",
+  "version": "2026.05.demo",
+  "classes": [
+    "ship"
+  ],
+  "input_size": [
+    640,
+    640
+  ],
+  "confidence_threshold": 0.25,
+  "nms_threshold": 0.45,
+  "model_bytes": 6251107,
+  "sha256": "c216ed82f02f7ea14e00c1f88200f175884057f62c4a9d3e3e83cf50c0b43ac3",
+  "chunk_size": 4096,
+  "chunk_count": 1530,
+  "created_at": "2026-06-01T22:16:56",
+  "source_model_path": "data/models/Ai_process_V3/models/security_maritime_ship_best.pt",
+  "display": {
+    "input_title": "原始海上 SAR 图像",
+    "output_title": "海上船只检测结果",
+    "style": "青色/黄色 ship 检测框"
+  },
+  "metrics": {
+    "mAP50": 0.991,
+    "summary": "SAR ship detection demo"
+  }
+}

@@ -1,0 +1,5 @@
+"run","frames","detections","avg_confidence","max_confidence","tx_bytes","rx_bytes","byte_delta","precision","recall","f1","source"
+"full_roi_layered_ui","326","11111","0.5749052786374326","0.8947721719741821","233752635","233752635","0","0.4005040050400504","0.3967546362339515","0.39862050432212126","configs\Ai_process_V2\logs\baseband\full_roi_layered_ui\ui_metrics.json"
+"task_driven_roi_layered_preview_ui","326","11111","0.5749052786374326","0.8947721719741821","233752635","233752635","0","0.4005040050400504","0.3967546362339515","0.39862050432212126","configs\Ai_process_V2\logs\baseband\task_driven_roi_layered_preview_ui\ui_metrics.json"
+"task_driven_roi_layered_ui","326","11111","0.5749052786374326","0.8947721719741821","233752635","233752635","0","0.4005040050400504","0.3967546362339515","0.39862050432212126","configs\Ai_process_V2\logs\baseband\task_driven_roi_layered_ui\ui_metrics.json"
+"ui_assets","1","48","0.5465589171896378","0.7421475648880005","982791","982791","0","0","0","0","configs\Ai_process_V2\logs\baseband\ui_assets\ui_metrics.json"

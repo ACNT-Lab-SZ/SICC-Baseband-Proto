@@ -1,0 +1,753 @@
+{
+  "summary": {
+    "protocol": "rs-ai-gpu-direct-v1",
+    "scheme": "roi-layered",
+    "frames": 40,
+    "fps": 8.78960655111428,
+    "avg_payload_nbytes": 1868400.0
+  },
+  "frames": [
+    {
+      "frame_id": 0,
+      "pts_ms": 0.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.8793300986289978,
+          "xyxy": [
+            0.0,
+            4.0,
+            114.0,
+            104.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 1,
+      "pts_ms": 1000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.8605655431747437,
+          "xyxy": [
+            3.0,
+            0.0,
+            76.0,
+            83.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 2,
+      "pts_ms": 2000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9587668776512146,
+          "xyxy": [
+            2.0,
+            0.0,
+            62.0,
+            90.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 3,
+      "pts_ms": 3000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "damaged_building",
+          "confidence": 0.9105674624443054,
+          "xyxy": [
+            4.0,
+            0.0,
+            95.0,
+            113.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 4,
+      "pts_ms": 4000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "damaged_building",
+          "confidence": 0.8918188810348511,
+          "xyxy": [
+            5.0,
+            0.0,
+            108.0,
+            123.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 5,
+      "pts_ms": 5000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.5882505774497986,
+          "xyxy": [
+            1.0,
+            4.0,
+            127.0,
+            106.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 6,
+      "pts_ms": 6000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "damaged_building",
+          "confidence": 0.872614860534668,
+          "xyxy": [
+            0.0,
+            3.0,
+            90.0,
+            71.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 7,
+      "pts_ms": 7000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "damaged_building",
+          "confidence": 0.6898993253707886,
+          "xyxy": [
+            5.0,
+            1.0,
+            113.0,
+            191.0
+          ]
+        },
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.5657914876937866,
+          "xyxy": [
+            5.0,
+            2.0,
+            112.0,
+            194.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 8,
+      "pts_ms": 8000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "damaged_building",
+          "confidence": 0.903706431388855,
+          "xyxy": [
+            6.0,
+            0.0,
+            133.0,
+            179.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 9,
+      "pts_ms": 9000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9598437547683716,
+          "xyxy": [
+            2.0,
+            0.0,
+            52.0,
+            58.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 10,
+      "pts_ms": 10000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 1,
+          "class_name": "damaged_building",
+          "confidence": 0.8767332434654236,
+          "xyxy": [
+            0.0,
+            4.0,
+            98.0,
+            91.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 11,
+      "pts_ms": 11000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9675668478012085,
+          "xyxy": [
+            1.0,
+            8.0,
+            264.0,
+            205.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 12,
+      "pts_ms": 12000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9573531746864319,
+          "xyxy": [
+            1.0,
+            4.0,
+            178.0,
+            98.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 13,
+      "pts_ms": 13000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9581798911094666,
+          "xyxy": [
+            1.0,
+            4.0,
+            179.0,
+            96.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 14,
+      "pts_ms": 14000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9668363928794861,
+          "xyxy": [
+            4.0,
+            0.0,
+            85.0,
+            113.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 15,
+      "pts_ms": 15000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.943401575088501,
+          "xyxy": [
+            4.0,
+            0.0,
+            91.0,
+            103.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 16,
+      "pts_ms": 16000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9604685306549072,
+          "xyxy": [
+            3.0,
+            0.0,
+            83.0,
+            92.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 17,
+      "pts_ms": 17000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9027736783027649,
+          "xyxy": [
+            3.0,
+            0.0,
+            81.0,
+            90.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 18,
+      "pts_ms": 18000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9607920050621033,
+          "xyxy": [
+            0.0,
+            4.0,
+            94.0,
+            87.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 19,
+      "pts_ms": 19000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9395714998245239,
+          "xyxy": [
+            3.0,
+            0.0,
+            78.0,
+            90.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 20,
+      "pts_ms": 20000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9651818871498108,
+          "xyxy": [
+            4.0,
+            1.0,
+            83.0,
+            104.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 21,
+      "pts_ms": 21000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.961515486240387,
+          "xyxy": [
+            3.0,
+            0.0,
+            76.0,
+            85.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 22,
+      "pts_ms": 22000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9677386283874512,
+          "xyxy": [
+            0.0,
+            3.0,
+            104.0,
+            82.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 23,
+      "pts_ms": 23000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9642820954322815,
+          "xyxy": [
+            0.0,
+            3.0,
+            96.0,
+            74.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 24,
+      "pts_ms": 24000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9744262099266052,
+          "xyxy": [
+            2.0,
+            0.0,
+            43.0,
+            74.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 25,
+      "pts_ms": 25000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9628753066062927,
+          "xyxy": [
+            0.0,
+            3.0,
+            72.0,
+            66.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 26,
+      "pts_ms": 26000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9672325849533081,
+          "xyxy": [
+            0.0,
+            2.0,
+            67.0,
+            48.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 27,
+      "pts_ms": 27000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.7258689999580383,
+          "xyxy": [
+            0.0,
+            5.0,
+            135.0,
+            122.0
+          ]
+        },
+        {
+          "class_id": 1,
+          "class_name": "damaged_building",
+          "confidence": 0.5319508910179138,
+          "xyxy": [
+            0.0,
+            5.0,
+            135.0,
+            121.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 28,
+      "pts_ms": 28000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9494255781173706,
+          "xyxy": [
+            4.0,
+            0.0,
+            85.0,
+            93.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 29,
+      "pts_ms": 29000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9535982012748718,
+          "xyxy": [
+            3.0,
+            0.0,
+            67.0,
+            83.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 30,
+      "pts_ms": 30000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9636027216911316,
+          "xyxy": [
+            3.0,
+            1.0,
+            70.0,
+            74.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 31,
+      "pts_ms": 31000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9644489288330078,
+          "xyxy": [
+            2.0,
+            0.0,
+            56.0,
+            67.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 32,
+      "pts_ms": 32000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9642573595046997,
+          "xyxy": [
+            2.0,
+            0.0,
+            58.0,
+            61.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 33,
+      "pts_ms": 33000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9614716172218323,
+          "xyxy": [
+            4.0,
+            1.0,
+            110.0,
+            117.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 34,
+      "pts_ms": 34000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9676100015640259,
+          "xyxy": [
+            0.0,
+            0.0,
+            50.0,
+            50.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 35,
+      "pts_ms": 35000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9638140797615051,
+          "xyxy": [
+            0.0,
+            2.0,
+            58.0,
+            53.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 36,
+      "pts_ms": 36000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9553693532943726,
+          "xyxy": [
+            3.0,
+            0.0,
+            66.0,
+            71.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 37,
+      "pts_ms": 37000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9687280058860779,
+          "xyxy": [
+            2.0,
+            0.0,
+            44.0,
+            51.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 38,
+      "pts_ms": 38000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9669678807258606,
+          "xyxy": [
+            0.0,
+            3.0,
+            76.0,
+            66.0
+          ]
+        }
+      ]
+    },
+    {
+      "frame_id": 39,
+      "pts_ms": 39000.0,
+      "payload_nbytes": 1868400,
+      "detections": [
+        {
+          "class_id": 0,
+          "class_name": "intact_building",
+          "confidence": 0.9660963416099548,
+          "xyxy": [
+            3.0,
+            0.0,
+            82.0,
+            90.0
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+"run","tx_gain_db","rx_gain_db","frames","ok","err","fer","ber","fps","goodput_mbps","decode_total_ms_per_frame","fec_ms_per_frame","status","source"
+"dual_usrp_gated_gpu_pipeline","31","22","14531","14398","133","0.009153","n/a","26","0.69","1.97","1.79","FAILED","data\datasets\transmission_file\Rx\ui_usrp_link_20260601_175341\usrp_gain_frame_metrics.csv"

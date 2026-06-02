@@ -1,0 +1,576 @@
+{
+  "stream": {
+    "format": "remote-sensing-feature-bitstream",
+    "imgsz": 640,
+    "model": "data/models/Ai_process_V2/models/viso_yolov8n_car_best.pt",
+    "resource_mode": "roi_layered_v1",
+    "split_layer": 22,
+    "stride": 1,
+    "tensor_codec": "int8",
+    "version": 1,
+    "video": "Ai_process_V2\\sample_data\\viso_002\\002.avi"
+  },
+  "frames_seen": 1,
+  "tensor_payload_bytes_seen": 915397,
+  "first_frame": {
+    "frame_id": 0,
+    "pts_ms": 0.0,
+    "source_size": [
+      1024,
+      1024
+    ],
+    "network_size": [
+      640,
+      640
+    ],
+    "split_layer": 22,
+    "tensors": [
+      {
+        "name": "x__base",
+        "shape": [
+          1,
+          256,
+          5,
+          5
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 2899,
+        "meta": {
+          "bg_downsample": 4,
+          "full_shape": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "group": "x",
+          "priority": "low",
+          "role": "base"
+        }
+      },
+      {
+        "name": "x__roi",
+        "shape": [
+          1,
+          256,
+          20,
+          20
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 29648,
+        "meta": {
+          "full_shape": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "group": "x",
+          "priority": "high",
+          "role": "roi"
+        }
+      },
+      {
+        "name": "x__mask",
+        "shape": [
+          20,
+          20
+        ],
+        "dtype": "uint8",
+        "encoding": "zlib+packbits",
+        "nbytes": 61,
+        "meta": {
+          "group": "x",
+          "role": "mask"
+        }
+      },
+      {
+        "name": "y_4__base",
+        "shape": [
+          1,
+          64,
+          20,
+          20
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 20160,
+        "meta": {
+          "bg_downsample": 4,
+          "full_shape": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "group": "y_4",
+          "priority": "low",
+          "role": "base"
+        }
+      },
+      {
+        "name": "y_4__roi",
+        "shape": [
+          1,
+          64,
+          80,
+          80
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 172888,
+        "meta": {
+          "full_shape": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "group": "y_4",
+          "priority": "high",
+          "role": "roi"
+        }
+      },
+      {
+        "name": "y_4__mask",
+        "shape": [
+          80,
+          80
+        ],
+        "dtype": "uint8",
+        "encoding": "zlib+packbits",
+        "nbytes": 161,
+        "meta": {
+          "group": "y_4",
+          "role": "mask"
+        }
+      },
+      {
+        "name": "y_6__base",
+        "shape": [
+          1,
+          128,
+          10,
+          10
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 9497,
+        "meta": {
+          "bg_downsample": 4,
+          "full_shape": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "group": "y_6",
+          "priority": "low",
+          "role": "base"
+        }
+      },
+      {
+        "name": "y_6__roi",
+        "shape": [
+          1,
+          128,
+          40,
+          40
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 93927,
+        "meta": {
+          "full_shape": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "group": "y_6",
+          "priority": "high",
+          "role": "roi"
+        }
+      },
+      {
+        "name": "y_6__mask",
+        "shape": [
+          40,
+          40
+        ],
+        "dtype": "uint8",
+        "encoding": "zlib+packbits",
+        "nbytes": 93,
+        "meta": {
+          "group": "y_6",
+          "role": "mask"
+        }
+      },
+      {
+        "name": "y_9__base",
+        "shape": [
+          1,
+          256,
+          5,
+          5
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 3888,
+        "meta": {
+          "bg_downsample": 4,
+          "full_shape": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "group": "y_9",
+          "priority": "low",
+          "role": "base"
+        }
+      },
+      {
+        "name": "y_9__roi",
+        "shape": [
+          1,
+          256,
+          20,
+          20
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 44904,
+        "meta": {
+          "full_shape": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "group": "y_9",
+          "priority": "high",
+          "role": "roi"
+        }
+      },
+      {
+        "name": "y_9__mask",
+        "shape": [
+          20,
+          20
+        ],
+        "dtype": "uint8",
+        "encoding": "zlib+packbits",
+        "nbytes": 61,
+        "meta": {
+          "group": "y_9",
+          "role": "mask"
+        }
+      },
+      {
+        "name": "y_12__base",
+        "shape": [
+          1,
+          128,
+          10,
+          10
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 9543,
+        "meta": {
+          "bg_downsample": 4,
+          "full_shape": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "group": "y_12",
+          "priority": "low",
+          "role": "base"
+        }
+      },
+      {
+        "name": "y_12__roi",
+        "shape": [
+          1,
+          128,
+          40,
+          40
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 98649,
+        "meta": {
+          "full_shape": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "group": "y_12",
+          "priority": "high",
+          "role": "roi"
+        }
+      },
+      {
+        "name": "y_12__mask",
+        "shape": [
+          40,
+          40
+        ],
+        "dtype": "uint8",
+        "encoding": "zlib+packbits",
+        "nbytes": 93,
+        "meta": {
+          "group": "y_12",
+          "role": "mask"
+        }
+      },
+      {
+        "name": "y_15__base",
+        "shape": [
+          1,
+          64,
+          20,
+          20
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 19695,
+        "meta": {
+          "bg_downsample": 4,
+          "full_shape": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "group": "y_15",
+          "priority": "low",
+          "role": "base"
+        }
+      },
+      {
+        "name": "y_15__roi",
+        "shape": [
+          1,
+          64,
+          80,
+          80
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 161606,
+        "meta": {
+          "full_shape": [
+            1,
+            64,
+            80,
+            80
+          ],
+          "group": "y_15",
+          "priority": "high",
+          "role": "roi"
+        }
+      },
+      {
+        "name": "y_15__mask",
+        "shape": [
+          80,
+          80
+        ],
+        "dtype": "uint8",
+        "encoding": "zlib+packbits",
+        "nbytes": 161,
+        "meta": {
+          "group": "y_15",
+          "role": "mask"
+        }
+      },
+      {
+        "name": "y_18__base",
+        "shape": [
+          1,
+          128,
+          10,
+          10
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 8332,
+        "meta": {
+          "bg_downsample": 4,
+          "full_shape": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "group": "y_18",
+          "priority": "low",
+          "role": "base"
+        }
+      },
+      {
+        "name": "y_18__roi",
+        "shape": [
+          1,
+          128,
+          40,
+          40
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 77737,
+        "meta": {
+          "full_shape": [
+            1,
+            128,
+            40,
+            40
+          ],
+          "group": "y_18",
+          "priority": "high",
+          "role": "roi"
+        }
+      },
+      {
+        "name": "y_18__mask",
+        "shape": [
+          40,
+          40
+        ],
+        "dtype": "uint8",
+        "encoding": "zlib+packbits",
+        "nbytes": 93,
+        "meta": {
+          "group": "y_18",
+          "role": "mask"
+        }
+      },
+      {
+        "name": "y_21__base",
+        "shape": [
+          1,
+          256,
+          5,
+          5
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 2899,
+        "meta": {
+          "bg_downsample": 4,
+          "full_shape": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "group": "y_21",
+          "priority": "low",
+          "role": "base"
+        }
+      },
+      {
+        "name": "y_21__roi",
+        "shape": [
+          1,
+          256,
+          20,
+          20
+        ],
+        "dtype": "int8",
+        "encoding": "zlib+symmetric_int8",
+        "nbytes": 29648,
+        "meta": {
+          "full_shape": [
+            1,
+            256,
+            20,
+            20
+          ],
+          "group": "y_21",
+          "priority": "high",
+          "role": "roi"
+        }
+      },
+      {
+        "name": "y_21__mask",
+        "shape": [
+          20,
+          20
+        ],
+        "dtype": "uint8",
+        "encoding": "zlib+packbits",
+        "nbytes": 61,
+        "meta": {
+          "group": "y_21",
+          "role": "mask"
+        }
+      },
+      {
+        "name": "__visual_base_jpeg",
+        "shape": [
+          256,
+          256,
+          3
+        ],
+        "dtype": "uint8",
+        "encoding": "raw+jpeg",
+        "nbytes": 11611,
+        "meta": {
+          "auxiliary": true,
+          "role": "visual_base",
+          "source_shape": [
+            1024,
+            1024
+          ]
+        }
+      },
+      {
+        "name": "__visual_roi_jpeg",
+        "shape": [
+          1024,
+          1024,
+          3
+        ],
+        "dtype": "uint8",
+        "encoding": "raw+jpeg",
+        "nbytes": 114620,
+        "meta": {
+          "auxiliary": true,
+          "role": "visual_roi",
+          "source_shape": [
+            1024,
+            1024
+          ],
+          "visual_quality": 88
+        }
+      },
+      {
+        "name": "__visual_roi_mask",
+        "shape": [
+          1024,
+          1024
+        ],
+        "dtype": "uint8",
+        "encoding": "raw+packbits",
+        "nbytes": 2462,
+        "meta": {
+          "auxiliary": true,
+          "role": "visual_mask",
+          "source_shape": [
+            1024,
+            1024
+          ]
+        }
+      }
+    ]
+  }
+}
+

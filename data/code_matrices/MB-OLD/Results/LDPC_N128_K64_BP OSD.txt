@@ -1,0 +1,64 @@
+
+
+程序开始时间：16-Apr-2024 14:22:06 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+0.000000    0.104685107    0.459418070     19.764165      1633.882083     123359.986744       653
+
+
+程序开始时间：16-Apr-2024 14:25:18 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：16-Apr-2024 17:43:23 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：30-Apr-2024 10:48:21 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:23:41 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:25:01 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:25:30 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:25:55 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks
+
+
+程序开始时间：20-Oct-2024 12:26:48 
+N = 128,  K = 64,  conste_name = BPSK  
+max_iter = 20,  order = 2  max_test_num = 2081  
+max_runs = 1.00e+12,  max_err = 300,  display_interval = 10  
+Eb/N0         BER          BLER        ave_iter_num      ave_test_num    ave_operation_num  total_blocks

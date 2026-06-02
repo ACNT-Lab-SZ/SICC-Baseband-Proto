@@ -1,0 +1,7 @@
+"task","scheme","frames","fps","avg_payload_kb","min_payload_kb","max_payload_kb","detections","source"
+"VISO vehicle split inference","uniform","120","13.06958987266409","1700",,,"5277","configs\Ai_process_V2\validation\gpu_direct_two_scheme_summary.json"
+"VISO vehicle split inference","roi-layered","120","10.391507725986834","907.865625",,,"5277","configs\Ai_process_V2\validation\gpu_direct_two_scheme_summary.json"
+"earthquake","roi-layered","40","8.78960655111428","1824.609375","1824.609375","1824.609375","42","configs\Ai_process_V3\tasks\earthquake\validation\gpu_direct_roundtrip.json"
+"maritime_ship","roi-layered","40","8.777530731425667","442.9875","254.609375","706.234375","88","configs\Ai_process_V3\tasks\maritime_ship\validation\gpu_direct_roundtrip.json"
+"flood","roi-layered","20","4.662607690621829","1423.096875","270.234375","1824.609375","112","configs\Ai_process_V3\tasks\flood\validation\roi_layered_roundtrip.json"
+"flood","uniform","20","5.498221891968295","1700","1700","1700","112","configs\Ai_process_V3\tasks\flood\validation\uniform_roundtrip.json"

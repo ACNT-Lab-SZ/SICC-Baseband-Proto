@@ -1,0 +1,149 @@
+#pragma once
+
+#include <cstddef>
+#include <cstdint>
+
+namespace rs_ai_gpu_direct {
+
+constexpr std::uint32_t kProtocolVersion = 4;
+
+enum class ResourceMode : std::uint32_t {
+    Uniform = 1,
+    RoiLayered = 2,
+};
+
+enum class TensorPriority : std::uint32_t {
+    Normal = 0,
+    Low = 1,
+    High = 2,
+    Control = 3,
+};
+
+enum class TensorDType : std::uint32_t {
+    Int8 = 1,
+    Float16 = 2,
+    Float32 = 3,
+    UInt8 = 4,
+};
+
+enum class TensorEncoding : std::uint32_t {
+    RawSymmetricInt8 = 1,
+    RawFloat16 = 2,
+    RawFloat32 = 3,
+    RawMaskU8 = 4,
+    NvJpeg = 5,
+    NvCompLz4 = 6,
+    NvCompGdeflate = 7,
+};
+
+enum class DeviceBufferKind : std::uint32_t {
+    Unknown = 0,
+    CudaDevice = 1,
+    CudaArray = 2,
+    ExternalDevice = 3,
+};
+
+enum class PipelineStage : std::uint32_t {
+    Nvdec = 1,
+    AiEncode = 2,
+    Nvjpeg = 3,
+    Nvcomp = 4,
+    TxBaseband = 5,
+    RxDemod = 6,
+    BpOsdDecode = 7,
+    AiDecode = 8,
+    Nvenc = 9,
+    UiTexture = 10,
+};
+
+struct DeviceSpan {
+    void* ptr = nullptr;
+    std::uint64_t bytes = 0;
+    DeviceBufferKind kind = DeviceBufferKind::CudaDevice;
+};
+
+struct SlabDesc {
+    DeviceSpan memory;
+    std::uint64_t capacity_bytes = 0;
+    std::uint64_t used_bytes = 0;
+    std::uint32_t alignment_bytes = 256;
+    std::uint32_t slab_id = 0;
+    void* cuda_stream = nullptr;
+    void* ready_event = nullptr;
+};
+
+struct TensorDesc {
+    const char* name = nullptr;
+    std::uint32_t ndim = 0;
+    std::int32_t shape[8]{};
+    TensorDType dtype = TensorDType::Int8;
+    TensorEncoding encoding = TensorEncoding::RawSymmetricInt8;
+    std::uint64_t byte_offset = 0;
+    std::uint64_t byte_size = 0;
+    float scale = 1.0f;
+    std::int32_t zero_point = 0;
+    const char* group = nullptr;
+    const char* role = nullptr;
+    TensorPriority priority = TensorPriority::Normal;
+    std::uint32_t full_ndim = 0;
+    std::int32_t full_shape[8]{};
+};
+
+struct FrameDesc {
+    std::uint32_t protocol_version = kProtocolVersion;
+    ResourceMode resource_mode = ResourceMode::Uniform;
+    std::uint32_t split_layer = 0;
+    std::uint32_t tensor_count = 0;
+    std::uint32_t frame_id = 0;
+    double pts_ms = 0.0;
+    std::int32_t source_h = 0;
+    std::int32_t source_w = 0;
+    std::int32_t network_h = 0;
+    std::int32_t network_w = 0;
+    std::uint64_t payload_nbytes = 0;
+    const TensorDesc* tensors = nullptr;
+};
+
+struct DevicePayload {
+    const std::uint8_t* data = nullptr;
+    std::uint64_t nbytes = 0;
+    void* cuda_stream = nullptr;
+    void* ready_event = nullptr;
+    std::uint32_t slab_id = 0;
+};
+
+struct DeviceFrameView {
+    FrameDesc desc;
+    DevicePayload payload;
+};
+
+struct DeviceImageView {
+    DeviceSpan planes[4]{};
+    std::uint32_t plane_count = 0;
+    std::int32_t width = 0;
+    std::int32_t height = 0;
+    std::int32_t pitch_bytes[4]{};
+    std::uint32_t fourcc = 0;
+    void* cuda_stream = nullptr;
+    void* ready_event = nullptr;
+};
+
+struct DeviceLlrView {
+    const float* llr = nullptr;
+    std::uint32_t blocks = 0;
+    std::uint32_t code_n = 0;
+    std::uint32_t code_k = 0;
+    void* cuda_stream = nullptr;
+    void* ready_event = nullptr;
+};
+
+struct UiTextureView {
+    DeviceSpan rgba;
+    std::int32_t width = 0;
+    std::int32_t height = 0;
+    std::int32_t pitch_bytes = 0;
+    void* cuda_stream = nullptr;
+    void* ready_event = nullptr;
+};
+
+}  // namespace rs_ai_gpu_direct

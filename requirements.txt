@@ -1,0 +1,19 @@
+# Consolidated Python dependencies found in the original workspace.
+# UI requirements came from Satellite_UI/requirements.txt and UI_NEW/requirements.txt.
+# AI requirements came from Ai_process_V3/requirements-rs-ai.txt.
+
+numpy==2.0.2
+PySide6==6.7.3
+pyqtgraph==0.13.7
+matplotlib==3.9.2
+PyOpenGL==3.1.7
+
+opencv-python>=4.8
+torch>=2.1
+ultralytics>=8.2
+pillow>=10.0
+rasterio>=1.3
+tifffile>=2024.0
+py7zr>=0.21
+scipy>=1.10
+h5py>=3.8

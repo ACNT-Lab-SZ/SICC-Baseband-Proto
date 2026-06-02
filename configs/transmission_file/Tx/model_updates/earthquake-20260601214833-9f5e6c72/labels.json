@@ -1,0 +1,7 @@
+{
+  "task_id": "earthquake",
+  "classes": [
+    "intact_building",
+    "damaged_building"
+  ]
+}

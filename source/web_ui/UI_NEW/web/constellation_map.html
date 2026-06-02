@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Qianfan WebGL Constellation</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020617;
+      color: #e5eefb;
+      font-family: "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+    }
+
+    #scene {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background:
+        radial-gradient(circle at 50% 55%, rgba(14, 165, 233, 0.16), transparent 30%),
+        linear-gradient(180deg, #020617 0%, #06111f 100%);
+    }
+
+    .hud {
+      position: fixed;
+      inset: 8px 8px auto 8px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 0.72fr);
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .panel {
+      min-width: 0;
+      padding: 8px 10px;
+      border: 1px solid rgba(96, 165, 250, 0.42);
+      border-radius: 6px;
+      background: rgba(5, 12, 27, 0.78);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.3);
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #67e8f9;
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #f59e0b;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.75);
+    }
+
+    .dot.live {
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    .dot.stale {
+      background: #fb7185;
+      box-shadow: 0 0 12px rgba(251, 113, 133, 0.8);
+    }
+
+    .meta {
+      margin-top: 5px;
+      color: #aebbd1;
+      font-size: 11px;
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .stat {
+      min-width: 0;
+      padding: 5px 6px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      border-radius: 5px;
+      background: rgba(15, 23, 42, 0.48);
+    }
+
+    .label {
+      color: #8fa3bf;
+      font-size: 10px;
+      line-height: 1.2;
+    }
+
+    .value {
+      margin-top: 2px;
+      color: #e2e8f0;
+      font-family: Consolas, "Roboto Mono", monospace;
+      font-size: 12px;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .links {
+      display: grid;
+      gap: 5px;
+    }
+
+    .link-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+      color: #d8e3f3;
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .link-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .link-value {
+      color: #86efac;
+      font-family: Consolas, "Roboto Mono", monospace;
+      white-space: nowrap;
+    }
+
+    .offline {
+      color: #fb7185;
+    }
+
+    .labels {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .sat-label {
+      position: absolute;
+      transform: translate(8px, -18px);
+      color: #d9fff2;
+      font: 10px Consolas, "Roboto Mono", monospace;
+      text-shadow: 0 1px 4px #020617, 0 0 7px rgba(34, 197, 94, 0.55);
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <div class="hud">
+    <div class="panel">
+      <div class="title"><span id="statusDot" class="dot"></span><span id="titleText">Qianfan NTN WebGL Constellation</span></div>
+      <div class="meta" id="summary">Awaiting MATLAB state on UDP 65435</div>
+      <div class="stats">
+        <div class="stat"><div class="label">SAT</div><div class="value" id="satCount">0</div></div>
+        <div class="stat"><div class="label">LINK</div><div class="value" id="linkCount">0</div></div>
+        <div class="stat"><div class="label">FRAME</div><div class="value" id="frameAge">--</div></div>
+        <div class="stat"><div class="label">MODE</div><div class="value" id="modeText">WAIT</div></div>
+      </div>
+    </div>
+    <div class="panel links" id="links"></div>
+  </div>
+  <div class="labels" id="labels"></div>
+
+  <script src="./assets/earth-texture-data.js"></script>
+  <script src="./assets/three.min.js"></script>
+  <script>
+    const canvas = document.getElementById("scene");
+    const labelsLayer = document.getElementById("labels");
+    const statusDot = document.getElementById("statusDot");
+    const titleText = document.getElementById("titleText");
+    const summaryEl = document.getElementById("summary");
+    const satCountEl = document.getElementById("satCount");
+    const linkCountEl = document.getElementById("linkCount");
+    const frameAgeEl = document.getElementById("frameAge");
+    const modeTextEl = document.getElementById("modeText");
+    const linksEl = document.getElementById("links");
+
+    function reportPageError(message) {
+      const text = message || "Unknown WebGL error";
+      console.error(text);
+      document.body.style.background = "#020617";
+      summaryEl.textContent = text;
+      titleText.textContent = "Qianfan NTN WebGL error";
+      statusDot.className = "dot stale";
+    }
+
+    window.addEventListener("error", (event) => {
+      reportPageError(event.message || String(event.error || event));
+    });
+
+    window.addEventListener("unhandledrejection", (event) => {
+      reportPageError(event.reason && event.reason.message ? event.reason.message : String(event.reason || event));
+    });
+
+    const EARTH_RADIUS_M = 6371000;
+    const EARTH_RADIUS = 1.0;
+    const MAX_TRAIL_POINTS = 72;
+    const MAX_LABELS = 8;
+    const DEG = Math.PI / 180;
+    const TEXTURE_LONGITUDE_OFFSET_DEG = 90;
+    const PRIMARY_GROUND_STATION = {
+      name: "Ground Station",
+      latitude: 35.6762,
+      longitude: 139.6503,
+      altitude_m: 40
+    };
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0x020617, 1);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, 1, 0.05, 50);
+    camera.position.set(0, 0, 4.2);
+
+    const root = new THREE.Group();
+    root.rotation.x = -0.18;
+    root.rotation.y = -0.72;
+    scene.add(root);
+
+    const textureLoader = new THREE.TextureLoader();
+    const earthTexture = textureLoader.load(window.EARTH_TEXTURE_DATA || "./assets/earth-blue-marble-2048.jpg");
+    if ("colorSpace" in earthTexture && THREE.SRGBColorSpace) {
+      earthTexture.colorSpace = THREE.SRGBColorSpace;
+    } else if ("encoding" in earthTexture && THREE.sRGBEncoding) {
+      earthTexture.encoding = THREE.sRGBEncoding;
+    }
+    earthTexture.anisotropy = 8;
+
+    const earth = new THREE.Mesh(
+      new THREE.SphereGeometry(EARTH_RADIUS, 96, 64),
+      new THREE.MeshPhongMaterial({
+        map: earthTexture,
+        color: new THREE.Color(0xc7d8e4),
+        emissive: new THREE.Color(0x07182a),
+        emissiveIntensity: 0.10,
+        shininess: 4,
+        specular: new THREE.Color(0x10243a)
+      })
+    );
+    root.add(earth);
+
+    const atmosphere = new THREE.Mesh(
+      new THREE.SphereGeometry(1.018, 96, 64),
+      new THREE.MeshBasicMaterial({
+        color: 0x3bc7ff,
+        transparent: true,
+        opacity: 0.12,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    root.add(atmosphere);
+
+    const orbitGroup = new THREE.Group();
+    const coverageGroup = new THREE.Group();
+    const linkGroup = new THREE.Group();
+    const satelliteGroup = new THREE.Group();
+    const stationGroup = new THREE.Group();
+    root.add(orbitGroup, coverageGroup, linkGroup, satelliteGroup, stationGroup);
+
+    scene.add(new THREE.AmbientLight(0x8fb8e6, 1.05));
+    const sun = new THREE.DirectionalLight(0xf8fbff, 1.45);
+    sun.position.set(-4, 2, 5);
+    scene.add(sun);
+
+    const starGroup = new THREE.Group();
+    scene.add(starGroup);
+    buildStars();
+
+    const satellites = new Map();
+    const satelliteMeshes = new Map();
+    const stationMeshes = new Map();
+    const trailLines = new Map();
+    const groundTrackLines = new Map();
+    const coverageMeshes = new Map();
+    const linkLines = [];
+    let liveState = null;
+    let lastFrameWallMs = 0;
+    let frameSerial = 0;
+    let dragging = false;
+    let lastPointer = null;
+    let zoom = 1;
+
+    function normalizeArray(value) {
+      if (!value) return [];
+      return Array.isArray(value) ? value : [value];
+    }
+
+    function primaryGroundStation(stateLike) {
+      const stations = normalizeArray(stateLike && stateLike.groundStations).filter(Boolean);
+      if (!stations.length) return { ...PRIMARY_GROUND_STATION };
+      const source = stations[0];
+      return {
+        name: PRIMARY_GROUND_STATION.name,
+        latitude: PRIMARY_GROUND_STATION.latitude,
+        longitude: PRIMARY_GROUND_STATION.longitude,
+        altitude_m: Number(source.altitude_m || source.altitude || PRIMARY_GROUND_STATION.altitude_m)
+      };
+    }
+
+    function visibleLinks(stateLike) {
+      const serving = normalizeArray(stateLike.servingLinks).filter((link) => link.visible);
+      const fallback = serving.length ? serving : normalizeArray(stateLike.bestLinks);
+      const primary = primaryGroundStation(stateLike);
+      if (!primary) return fallback;
+      const sourceStations = normalizeArray(stateLike && stateLike.groundStations).filter(Boolean);
+      const sourceName = sourceStations.length ? String(sourceStations[0].name || "GS") : String(primary.name || "GS");
+      return fallback
+        .filter((link) => String(link.groundStation || "") === sourceName)
+        .map((link) => ({ ...link, groundStation: primary.name }));
+    }
+
+    function clamp(value, lo, hi) {
+      return Math.max(lo, Math.min(hi, value));
+    }
+
+    function lerp(a, b, t) {
+      return a + (b - a) * t;
+    }
+
+    function wrapLon(lon) {
+      return ((lon + 540) % 360) - 180;
+    }
+
+    function lerpLon(a, b, t) {
+      let d = b - a;
+      if (d > 180) d -= 360;
+      if (d < -180) d += 360;
+      return wrapLon(a + d * t);
+    }
+
+    function latLonToVector(lat, lon, radius = EARTH_RADIUS) {
+      const phi = lat * DEG;
+      const theta = (lon + TEXTURE_LONGITUDE_OFFSET_DEG) * DEG;
+      const c = Math.cos(phi);
+      return new THREE.Vector3(
+        -radius * c * Math.cos(theta),
+        radius * Math.sin(phi),
+        radius * c * Math.sin(theta)
+      );
+    }
+
+    function satelliteRadiusScale(sat) {
+      const alt = Number(sat.alt_m || sat.altitude_m || 600000);
+      return EARTH_RADIUS + clamp(alt / EARTH_RADIUS_M, 0.07, 0.30);
+    }
+
+    function buildStars() {
+      const geometry = new THREE.BufferGeometry();
+      const positions = [];
+      for (let i = 0; i < 600; i++) {
+        const a = (i * 137.508) * DEG;
+        const z = 1 - 2 * ((i + 0.5) / 600);
+        const r = Math.sqrt(1 - z * z);
+        positions.push(Math.cos(a) * r * 18, z * 18, Math.sin(a) * r * 18);
+      }
+      geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+      const stars = new THREE.Points(
+        geometry,
+        new THREE.PointsMaterial({ color: 0xdbeafe, size: 0.022, transparent: true, opacity: 0.72 })
+      );
+      starGroup.add(stars);
+    }
+
+    function makeSatelliteMesh(active = false) {
+      const body = new THREE.Group();
+      const scale = active ? 1.25 : 0.82;
+      const core = new THREE.Mesh(
+        new THREE.BoxGeometry((active ? 0.035 : 0.018) * scale, (active ? 0.022 : 0.012) * scale, (active ? 0.028 : 0.014) * scale),
+        new THREE.MeshPhongMaterial({ color: active ? 0xeafff5 : 0x9eefff, emissive: active ? 0x1f8f54 : 0x045264, shininess: 18 })
+      );
+      const leftPanel = new THREE.Mesh(
+        new THREE.BoxGeometry((active ? 0.058 : 0.026) * scale, 0.006 * scale, (active ? 0.026 : 0.012) * scale),
+        new THREE.MeshBasicMaterial({ color: active ? 0x4ade80 : 0x38bdf8, transparent: true, opacity: active ? 0.86 : 0.28 })
+      );
+      const rightPanel = leftPanel.clone();
+      leftPanel.position.x = -0.055 * scale;
+      rightPanel.position.x = 0.055 * scale;
+      const mast = new THREE.Mesh(
+        new THREE.BoxGeometry((active ? 0.092 : 0.044) * scale, 0.003 * scale, 0.003 * scale),
+        new THREE.MeshBasicMaterial({ color: active ? 0xbbf7d0 : 0x7dd3fc, transparent: true, opacity: active ? 0.75 : 0.22 })
+      );
+      const glow = new THREE.Mesh(
+        new THREE.SphereGeometry(active ? 0.085 : 0.024, 16, 12),
+        new THREE.MeshBasicMaterial({
+          color: active ? 0x4ade80 : 0x22d3ee,
+          transparent: true,
+          opacity: active ? 0.18 : 0.045,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        })
+      );
+      body.add(glow, mast, leftPanel, rightPanel, core);
+      return body;
+    }
+
+    function makeStationMesh(active = false) {
+      const holder = new THREE.Group();
+      const accent = active ? 0xfbbf24 : 0x38bdf8;
+      const mastMat = new THREE.MeshPhongMaterial({ color: 0xe2e8f0, shininess: 22 });
+      const darkMat = new THREE.MeshPhongMaterial({ color: 0x475569, shininess: 18 });
+      const panelMat = new THREE.MeshPhongMaterial({
+        color: accent,
+        emissive: active ? 0x5c3000 : 0x043447,
+        emissiveIntensity: active ? 0.32 : 0.22,
+        shininess: 28
+      });
+
+      const base = new THREE.Mesh(new THREE.CylinderGeometry(0.040, 0.050, 0.014, 20), darkMat);
+      base.position.y = 0.007;
+
+      const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.006, 0.009, 0.105, 12), mastMat);
+      mast.position.y = 0.060;
+
+      const cap = new THREE.Mesh(new THREE.SphereGeometry(0.012, 14, 10), new THREE.MeshBasicMaterial({ color: 0xf8fafc }));
+      cap.position.y = 0.120;
+
+      for (const angle of [0, Math.PI * 2 / 3, Math.PI * 4 / 3]) {
+        const arm = new THREE.Mesh(new THREE.BoxGeometry(0.044, 0.004, 0.004), mastMat);
+        arm.position.set(Math.cos(angle) * 0.022, 0.092, Math.sin(angle) * 0.022);
+        arm.rotation.y = -angle;
+        holder.add(arm);
+
+        const panel = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.034, 0.007), panelMat);
+        panel.position.set(Math.cos(angle) * 0.046, 0.092, Math.sin(angle) * 0.046);
+        panel.rotation.y = -angle;
+        holder.add(panel);
+      }
+
+      const halo = new THREE.Mesh(
+        new THREE.SphereGeometry(active ? 0.082 : 0.066, 18, 14),
+        new THREE.MeshBasicMaterial({
+          color: accent,
+          transparent: true,
+          opacity: active ? 0.18 : 0.13,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        })
+      );
+      halo.position.y = 0.080;
+
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: accent,
+        transparent: true,
+        opacity: active ? 0.58 : 0.42,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      });
+      for (let i = 0; i < 2; i++) {
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(0.040 + i * 0.018, 0.0022, 8, 56), ringMat);
+        ring.rotation.x = Math.PI / 2;
+        ring.position.y = 0.120 + i * 0.012;
+        holder.add(ring);
+      }
+
+      holder.add(halo, base, mast, cap);
+      holder.userData.isStation = true;
+      return holder;
+    }
+
+    function buildPreviewState() {
+      const sats = [];
+      const phase = performance.now() * 0.006;
+      for (let plane = 0; plane < 6; plane++) {
+        for (let slot = 0; slot < 10; slot++) {
+          const anomaly = phase + slot * 36 + plane * 9;
+          const inc = 88.9 * DEG;
+          const raan = plane * 30 * DEG;
+          const a = anomaly * DEG;
+          const x0 = Math.cos(a);
+          const y0 = Math.sin(a) * Math.cos(inc);
+          const z0 = Math.sin(a) * Math.sin(inc);
+          const x = x0 * Math.cos(raan) - y0 * Math.sin(raan);
+          const z = x0 * Math.sin(raan) + y0 * Math.cos(raan);
+          sats.push({
+            name: `QF-P${plane + 1}-${slot + 1}`,
+            lat: Math.asin(z0) / DEG,
+            lon: Math.atan2(z, x) / DEG,
+            alt_m: 1100000,
+            coverage_radius_deg: 21
+          });
+        }
+      }
+      return {
+        type: "preview",
+        time_utc: "waiting for MATLAB qianfan_ntn_state",
+        groundStations: [
+          { ...PRIMARY_GROUND_STATION }
+        ],
+        satellites: sats,
+        bestLinks: []
+      };
+    }
+
+    function ingestState(nextState) {
+      if (!nextState || !nextState.satellites) return;
+      const now = performance.now();
+      const wasLive = Boolean(liveState);
+      if (!wasLive) {
+        clearPreviewObjects();
+      }
+      liveState = nextState;
+      lastFrameWallMs = now;
+      frameSerial += 1;
+
+      for (const raw of normalizeArray(nextState.satellites)) {
+        const name = String(raw.name || raw.Name || `SAT-${satellites.size + 1}`);
+        const target = {
+          name,
+          lat: Number(raw.lat),
+          lon: wrapLon(Number(raw.lon)),
+          alt_m: Number(raw.alt_m || raw.altitude_m || 600000),
+          coverage_radius_deg: Number(raw.coverage_radius_deg || 0),
+          frameSerial
+        };
+        if (!Number.isFinite(target.lat) || !Number.isFinite(target.lon)) continue;
+
+        const existing = satellites.get(name);
+        if (existing) {
+          const current = sampleSatellite(existing, now);
+          existing.prev = current;
+          existing.target = target;
+          existing.t0 = now;
+          existing.t1 = now + 1150;
+        } else {
+          satellites.set(name, { prev: target, target, t0: now, t1: now + 1150, trail: [] });
+        }
+      }
+
+      for (const [name, item] of satellites.entries()) {
+        if (item.target.frameSerial < frameSerial - 2) {
+          satellites.delete(name);
+          removeObject(satelliteMeshes, name);
+          removeObject(trailLines, name);
+          removeObject(groundTrackLines, name);
+          removeObject(coverageMeshes, name);
+        }
+      }
+    }
+
+    function clearPreviewObjects() {
+      satellites.clear();
+      for (const key of [...satelliteMeshes.keys()]) removeObject(satelliteMeshes, key);
+      for (const key of [...trailLines.keys()]) removeObject(trailLines, key);
+      for (const key of [...groundTrackLines.keys()]) removeObject(groundTrackLines, key);
+      for (const key of [...coverageMeshes.keys()]) removeObject(coverageMeshes, key);
+      while (linkLines.length) {
+        const line = linkLines.pop();
+        line.parent?.remove(line);
+        line.geometry?.dispose?.();
+        line.material?.dispose?.();
+      }
+      labelsLayer.innerHTML = "";
+    }
+
+    function sampleSatellite(item, now) {
+      if (!item || !item.target || !item.prev) return null;
+      const t = clamp((now - item.t0) / Math.max(1, item.t1 - item.t0), 0, 1);
+      return {
+        name: item.target.name,
+        lat: lerp(item.prev.lat, item.target.lat, t),
+        lon: lerpLon(item.prev.lon, item.target.lon, t),
+        alt_m: lerp(item.prev.alt_m, item.target.alt_m, t),
+        coverage_radius_deg: lerp(item.prev.coverage_radius_deg || 0, item.target.coverage_radius_deg || 0, t)
+      };
+    }
+
+    function removeObject(map, key) {
+      const obj = map.get(key);
+      if (obj) {
+        obj.parent?.remove(obj);
+        obj.traverse?.((child) => {
+          child.geometry?.dispose?.();
+          child.material?.dispose?.();
+        });
+        map.delete(key);
+      }
+    }
+
+    function currentState() {
+      return liveState || buildPreviewState();
+    }
+
+    function currentSatellites(now) {
+      if (!liveState) return normalizeArray(buildPreviewState().satellites);
+      return [...satellites.values()].map((item) => sampleSatellite(item, now)).filter(Boolean);
+    }
+
+    function updateSatelliteObjects(stateForDraw, sats, activeNames) {
+      const visibleNames = new Set();
+      for (const sat of sats) {
+        visibleNames.add(sat.name);
+        let mesh = satelliteMeshes.get(sat.name);
+        const active = activeNames.has(sat.name);
+        if (!mesh || mesh.userData.active !== active) {
+          removeObject(satelliteMeshes, sat.name);
+          mesh = makeSatelliteMesh(active);
+          mesh.userData.active = active;
+          satelliteGroup.add(mesh);
+          satelliteMeshes.set(sat.name, mesh);
+        }
+        mesh.position.copy(latLonToVector(sat.lat, sat.lon, satelliteRadiusScale(sat)));
+        mesh.lookAt(mesh.position.clone().multiplyScalar(1.35));
+        mesh.rotation.z += performance.now() * 0.00008;
+        updateTrail(sat, active);
+        if (active) {
+          updateCoverage(sat);
+        } else {
+          removeObject(coverageMeshes, sat.name);
+        }
+      }
+
+      for (const name of [...satelliteMeshes.keys()]) {
+        if (!visibleNames.has(name)) removeObject(satelliteMeshes, name);
+      }
+      for (const name of [...coverageMeshes.keys()]) {
+        if (!visibleNames.has(name) || !activeNames.has(name)) removeObject(coverageMeshes, name);
+      }
+    }
+
+    function updateTrail(sat, active) {
+      let item = satellites.get(sat.name);
+      if (!item && !liveState) {
+        item = { trail: [] };
+        satellites.set(sat.name, item);
+      }
+      if (item) {
+        const last = item.trail[item.trail.length - 1];
+        if (!last || Math.abs(last.lat - sat.lat) + Math.abs(last.lon - sat.lon) > 0.05) {
+          item.trail.push({ ...sat });
+          while (item.trail.length > MAX_TRAIL_POINTS) item.trail.shift();
+        }
+        drawLineFromPoints(trailLines, sat.name, orbitGroup, item.trail.map((p) => latLonToVector(p.lat, p.lon, satelliteRadiusScale(p))), active ? 0x86efac : 0x38bdf8, active ? 0.56 : 0.24);
+        drawLineFromPoints(groundTrackLines, `${sat.name}-ground`, orbitGroup, item.trail.map((p) => latLonToVector(p.lat, p.lon, 1.012)), 0xfacc15, active ? 0.22 : 0.09);
+      }
+    }
+
+    function drawLineFromPoints(map, key, group, points, color, opacity) {
+      if (points.length < 2) return;
+      removeObject(map, key);
+      const geometry = new THREE.BufferGeometry().setFromPoints(points);
+      const material = new THREE.LineBasicMaterial({ color, transparent: true, opacity, depthWrite: false });
+      const line = new THREE.Line(geometry, material);
+      group.add(line);
+      map.set(key, line);
+    }
+
+    function coveragePoints(sat) {
+      const radiusDeg = Number(sat.coverage_radius_deg || 0);
+      if (!Number.isFinite(radiusDeg) || radiusDeg <= 0) return [];
+      const lat1 = sat.lat * DEG;
+      const lon1 = sat.lon * DEG;
+      const d = radiusDeg * DEG;
+      const points = [];
+      points.push(latLonToVector(sat.lat, sat.lon, 1.018));
+      for (let b = 0; b <= Math.PI * 2 + 0.01; b += Math.PI / 36) {
+        const lat = Math.asin(Math.sin(lat1) * Math.cos(d) + Math.cos(lat1) * Math.sin(d) * Math.cos(b));
+        const lon = lon1 + Math.atan2(Math.sin(b) * Math.sin(d) * Math.cos(lat1), Math.cos(d) - Math.sin(lat1) * Math.sin(lat));
+        points.push(latLonToVector(lat / DEG, lon / DEG, 1.018));
+      }
+      return points;
+    }
+
+    function updateCoverage(sat) {
+      removeObject(coverageMeshes, sat.name);
+      const points = coveragePoints(sat);
+      if (points.length < 4) return;
+      const holder = new THREE.Group();
+
+      const boundaryPoints = points.slice(1);
+      const lineGeometry = new THREE.BufferGeometry().setFromPoints(boundaryPoints);
+      const line = new THREE.LineLoop(
+        lineGeometry,
+        new THREE.LineBasicMaterial({ color: 0x86efac, transparent: true, opacity: 0.82, depthWrite: false })
+      );
+
+      const vertices = [];
+      const center = points[0];
+      for (let i = 0; i < boundaryPoints.length; i++) {
+        const a = boundaryPoints[i];
+        const b = boundaryPoints[(i + 1) % boundaryPoints.length];
+        vertices.push(center.x, center.y, center.z, a.x, a.y, a.z, b.x, b.y, b.z);
+      }
+      const fillGeometry = new THREE.BufferGeometry();
+      fillGeometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+      fillGeometry.computeVertexNormals();
+      const fill = new THREE.Mesh(
+        fillGeometry,
+        new THREE.MeshBasicMaterial({
+          color: 0x22c55e,
+          transparent: true,
+          opacity: 0.14,
+          side: THREE.DoubleSide,
+          depthWrite: false
+        })
+      );
+
+      const satPos = latLonToVector(sat.lat, sat.lon, satelliteRadiusScale(sat));
+      const beamGeometry = new THREE.BufferGeometry();
+      const beamVertices = [];
+      for (let i = 0; i < boundaryPoints.length; i += 9) {
+        const p = boundaryPoints[i];
+        beamVertices.push(satPos.x, satPos.y, satPos.z, p.x, p.y, p.z);
+      }
+      beamGeometry.setAttribute("position", new THREE.Float32BufferAttribute(beamVertices, 3));
+      const beams = new THREE.LineSegments(
+        beamGeometry,
+        new THREE.LineBasicMaterial({ color: 0xbbf7d0, transparent: true, opacity: 0.24, depthWrite: false })
+      );
+
+      holder.add(fill, line, beams);
+      coverageGroup.add(holder);
+      coverageMeshes.set(sat.name, holder);
+    }
+
+    function updateStations(stateForDraw, activeGroundNames) {
+      const primary = primaryGroundStation(stateForDraw);
+      const stations = primary ? [primary] : [];
+      const seen = new Set();
+      for (const gs of stations) {
+        const name = String(gs.name || "GS");
+        seen.add(name);
+        const active = activeGroundNames.has(name);
+        let mesh = stationMeshes.get(name);
+        if (!mesh || mesh.userData.active !== active) {
+          removeObject(stationMeshes, name);
+          mesh = makeStationMesh(active);
+          mesh.userData.active = active;
+          stationGroup.add(mesh);
+          stationMeshes.set(name, mesh);
+        }
+        const pos = latLonToVector(Number(gs.latitude || gs.lat), Number(gs.longitude || gs.lon), 1.035);
+        mesh.position.copy(pos);
+        mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), pos.clone().normalize());
+      }
+      for (const name of [...stationMeshes.keys()]) {
+        if (!seen.has(name)) removeObject(stationMeshes, name);
+      }
+    }
+
+    function updateLinks(stateForDraw, sats, links) {
+      while (linkLines.length) {
+        const line = linkLines.pop();
+        line.parent?.remove(line);
+        line.geometry.dispose();
+        line.material.dispose();
+      }
+      const primary = primaryGroundStation(stateForDraw);
+      const stations = primary ? [primary] : [];
+      for (const link of links) {
+        if (!link.visible) continue;
+        const sat = sats.find((item) => item.name === link.satellite);
+        const gs = stations.find((item) => item.name === link.groundStation);
+        if (!sat || !gs) continue;
+        const points = [
+          latLonToVector(Number(gs.latitude || gs.lat), Number(gs.longitude || gs.lon), 1.04),
+          latLonToVector(sat.lat, sat.lon, satelliteRadiusScale(sat))
+        ];
+        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+        const material = new THREE.LineBasicMaterial({ color: 0x4ade80, transparent: true, opacity: 0.86 });
+        const line = new THREE.Line(geometry, material);
+        linkGroup.add(line);
+        linkLines.push(line);
+      }
+    }
+
+    function renderLabels(sats, activeNames) {
+      labelsLayer.innerHTML = "";
+      const active = sats.filter((sat) => activeNames.has(sat.name)).slice(0, MAX_LABELS);
+      for (const sat of active) {
+        const pos = latLonToVector(sat.lat, sat.lon, satelliteRadiusScale(sat));
+        const world = pos.clone().applyMatrix4(root.matrixWorld);
+        const ndc = world.project(camera);
+        if (ndc.z < -1 || ndc.z > 1) continue;
+        const x = (ndc.x * 0.5 + 0.5) * innerWidth;
+        const y = (-ndc.y * 0.5 + 0.5) * innerHeight;
+        const label = document.createElement("div");
+        label.className = "sat-label";
+        label.style.left = `${x}px`;
+        label.style.top = `${y}px`;
+        label.textContent = sat.name;
+        labelsLayer.appendChild(label);
+      }
+    }
+
+    function renderHud(stateForHud, sats, links) {
+      const active = links.filter((link) => link.visible);
+      const age = liveState ? (performance.now() - lastFrameWallMs) / 1000 : Infinity;
+      const isPreview = !liveState;
+      const stale = liveState && age > 8;
+      statusDot.className = `dot ${isPreview ? "" : stale ? "stale" : "live"}`;
+      titleText.textContent = isPreview ? "Qianfan NTN WebGL Preview" : "Qianfan NTN WebGL Live";
+      summaryEl.textContent = isPreview ? "Awaiting MATLAB qianfan_ntn_state on UDP 65435" : `${stateForHud.time_utc || "--"} | ${stale ? "state stale" : "MATLAB live"}`;
+      satCountEl.textContent = String(sats.length);
+      linkCountEl.textContent = String(active.length);
+      frameAgeEl.textContent = isPreview ? "--" : `${age.toFixed(1)}s`;
+      modeTextEl.textContent = isPreview ? "WAIT" : stale ? "STALE" : "LIVE";
+
+      linksEl.innerHTML = "";
+      if (!links.length) {
+        linksEl.innerHTML = `<div class="link-row"><span class="link-name offline">等待可见卫星链路</span><span class="link-value">${isPreview ? "WAIT" : "NO LINK"}</span></div>`;
+        return;
+      }
+      const activeFirst = [...links].sort((a, b) => Number(Boolean(b.visible)) - Number(Boolean(a.visible)));
+      for (const link of activeFirst.slice(0, 6)) {
+        const row = document.createElement("div");
+        const visible = Boolean(link.visible);
+        const linkName = visible
+          ? `${link.groundStation || "GS"} -> ${link.satellite || "SAT"}`
+          : `${link.groundStation || "GS"}: 等待可见星`;
+        row.className = "link-row";
+        row.innerHTML = `
+          <span class="link-name ${visible ? "" : "offline"}">${linkName}</span>
+          <span class="link-value ${visible ? "" : "offline"}">${visible ? `${Number(link.elevation_deg || 0).toFixed(1)}deg ${Number(link.pathLoss_dB || 0).toFixed(1)}dB ${Math.round(Number(link.satelliteDoppler_Hz || 0))}Hz ${link.delayProfile || ""}` : "NO LINK"}</span>
+        `;
+        linksEl.appendChild(row);
+      }
+    }
+
+    function updateScene() {
+      const now = performance.now();
+      const stateForDraw = currentState();
+      const sats = currentSatellites(now);
+      const links = visibleLinks(stateForDraw);
+      const activeSatNames = new Set(links.filter((link) => link.visible).map((link) => String(link.satellite || "")));
+      const activeGroundNames = new Set(links.filter((link) => link.visible).map((link) => String(link.groundStation || "")));
+
+      if (!dragging) root.rotation.y += liveState ? 0.0009 : 0.0022;
+      try {
+        updateSatelliteObjects(stateForDraw, sats, activeSatNames);
+        updateStations(stateForDraw, activeGroundNames);
+        updateLinks(stateForDraw, sats, links);
+      } catch (error) {
+        summaryEl.textContent = error && error.message ? error.message : String(error);
+        statusDot.className = "dot stale";
+      }
+      renderHud(stateForDraw, sats, links);
+      renderLabels(sats, activeSatNames);
+    }
+
+    function resize() {
+      renderer.setSize(innerWidth, innerHeight, false);
+      camera.aspect = innerWidth / Math.max(1, innerHeight);
+      camera.position.z = 4.2 / zoom;
+      camera.updateProjectionMatrix();
+    }
+
+    function animate() {
+      try {
+        updateScene();
+        renderer.render(scene, camera);
+      } catch (error) {
+        summaryEl.textContent = error && error.message ? error.message : String(error);
+        statusDot.className = "dot stale";
+      }
+      requestAnimationFrame(animate);
+    }
+
+    window.updateConstellation = function updateConstellation(nextState) {
+      try {
+        ingestState(nextState);
+      } catch (error) {
+        titleText.textContent = "Qianfan NTN WebGL update error";
+        summaryEl.textContent = error && error.message ? error.message : String(error);
+        statusDot.className = "dot stale";
+      }
+    };
+
+    canvas.addEventListener("pointerdown", (event) => {
+      dragging = true;
+      lastPointer = { x: event.clientX, y: event.clientY };
+      canvas.setPointerCapture(event.pointerId);
+    });
+
+    canvas.addEventListener("pointermove", (event) => {
+      if (!dragging || !lastPointer) return;
+      root.rotation.y += (event.clientX - lastPointer.x) * 0.006;
+      root.rotation.x += (event.clientY - lastPointer.y) * 0.006;
+      root.rotation.x = clamp(root.rotation.x, -1.15, 1.15);
+      lastPointer = { x: event.clientX, y: event.clientY };
+    });
+
+    canvas.addEventListener("pointerup", () => {
+      dragging = false;
+      lastPointer = null;
+    });
+
+    canvas.addEventListener("wheel", (event) => {
+      zoom = clamp(zoom - Math.sign(event.deltaY) * 0.08, 0.7, 1.55);
+      resize();
+      event.preventDefault();
+    }, { passive: false });
+
+    addEventListener("resize", resize);
+    resize();
+    animate();
+    console.info("Qianfan WebGL constellation renderer initialized");
+  </script>
+</body>
+</html>
