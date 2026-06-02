@@ -1,13 +1,5 @@
 # USRP NTN Project Organized Workspace
 
-本目录是对原始 USRP NTN 工程的一次全文件夹扫描整理结果，生成时间：2026-06-01。
-
-整理原则：
-
-- 原工程文件未移动、未删除。
-- 本目录中的文件按用途重新归类，并保留原始相对路径，方便回溯。
-- 本目录中的归类文件是独立副本，适合作为后续 GitHub 上传源。
-- `build`、虚拟环境、缓存、浏览器运行状态、运行日志等生成物不纳入主整理目录，但记录在 `manifests/excluded_manifest.csv`。
 
 ## Directory Layout
 
