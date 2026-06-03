@@ -1,55 +1,119 @@
 # SICC Baseband Prototype
 
-SICC Baseband Prototype 是一个面向星地/USRP 基带链路验证的原型工程，覆盖 PySide6 可视化 UI、UHD C++/CUDA 收发链路、LDPC/Polar 编译码矩阵、MATLAB NTN/链路算法入口，以及遥感 AI 业务与模型更新流程的代码骨架。
+![Integrated computing-communication baseband prototype for spaceborne intelligence](assets/readme/spaceborne_intelligent_baseband_title.png)
 
-本仓库来自原始实验工程的整理上传版，保留了必要源码、脚本、构建入口、配置、编码矩阵和性能结果图表。大型模型、训练数据、视频素材、原始链路日志和运行生成物未纳入本次 Git 上传。
+SICC Baseband Prototype is a software-defined baseband transmission prototype for spaceborne intelligent systems. It explores how onboard AI workloads, adaptive link control, and baseband communication processing can share a unified GPU-centric execution path instead of being deployed as isolated computing and communication subsystems.
+
+The prototype targets integrated communication-computing scenarios such as remote-sensing video and image downlink, target detection, telemetry and telecommand, semantic feature transmission, and model update delivery. The central idea is to reduce repeated cross-architecture data movement and make semantic payload information, link state, coded bits, modulation symbols, LLR soft information, and decoding results available within a continuous GPU-native data path.
+
+## Motivation
+
+Spaceborne intelligence is moving satellite systems from a ground-centric processing model toward onboard computing and integrated communication-computing. In traditional architectures, intelligent payload processing and baseband communication are often separated. This causes several practical bottlenecks:
+
+- Business data may pass through multiple CPU/GPU/baseband transfer stages before transmission.
+- Semantic information from AI tasks and soft information from channel decoding are difficult to reuse across subsystems.
+- Multi-service and multi-standard baseband adaptation is hard to coordinate with task importance and link dynamics.
+- Link resources, onboard computing resources, and baseband processing capability cannot be optimized as a single closed-loop system.
+
+This repository provides a runnable prototype foundation for studying these issues under a unified GPU architecture.
+
+## System Concept
+
+The system organizes spaceborne intelligent computing, link-aware control, and baseband communication into one cooperative processing pipeline.
+
+CPU-side responsibilities:
+
+- Workflow scheduling and task orchestration.
+- Runtime parameter configuration.
+- USRP peripheral I/O.
+- Process supervision and status monitoring.
+- UI control and experiment coordination.
+
+GPU-side responsibilities:
+
+- Semantic feature processing.
+- Link strategy execution.
+- Channel coding and decoding.
+- OFDM modulation and demodulation.
+- Synchronization, equalization, and LLR computation.
+- BP/OSD parallel decoding and batch processing.
+
+This design reduces the repeated movement found in a conventional AI-compute to CPU relay to dedicated-baseband workflow, while preserving enough modularity for USRP experiments, offline simulations, and UI-driven demonstrations.
+
+## Key Capabilities
+
+- CUDA OFDM/LDPC baseband transmission pipeline.
+- GPU-assisted synchronization, demodulation, equalization, and LLR generation.
+- BP/OSD parallel decoding for short-code reliable transmission experiments.
+- Configurable modulation, coding parameters, decoder modes, and protection levels.
+- Semantic-aware payload handling for remote-sensing AI tasks.
+- Model update packaging, chunking, manifest generation, and receiver-side activation.
+- Link adaptation driven by channel prediction, historical link state, orbital dynamics, and service importance.
+- C++ UHD scheduling for USRP software-defined radio integration.
+- PySide6 UI for experiment control, telemetry display, and task-level visualization.
+
+## Validation Highlights
+
+The prototype has been validated with a semi-physical hardware-in-the-loop platform combining orbital dynamics, an NTN channel model, a GPU computing platform, and USRP software-defined radios.
+
+Observed prototype-level results include:
+
+- End-to-end closed-loop execution from business input, link decision, GPU baseband processing, USRP wireless transmission, to task evaluation.
+- A semantic layered transmission mechanism that reduces remote-sensing feature payload by about 46.6% without degrading target detection results in the tested workflow.
+- GPU BP/OSD decoding with LLR soft-information output and batch decoding.
+- Short-code general decoding information throughput of about 28 Mbps in GPU decoding tests.
+
+These results indicate the feasibility and engineering basis of an integrated computing-communication baseband transmission prototype under a unified GPU architecture.
 
 ## Repository Layout
 
 ```text
 .
-├─ START_UI_NEW.bat              Windows UI 启动入口
-├─ SETUP_UI_ENV.bat              Windows UI 环境安装入口
-├─ requirements.txt              Python 依赖清单
+├─ START_UI_NEW.bat
+├─ SETUP_UI_ENV.bat
+├─ requirements.txt
+├─ assets/readme/
+│  └─ spaceborne_intelligent_baseband_title.png
 ├─ source/
-│  ├─ python/                    PySide6 UI、AI 业务链路、工具脚本
-│  ├─ cpp_cuda/                  UHD/C++/CUDA/LDPC-OFDM 源码与测试
-│  ├─ matlab/                    MATLAB 编译码与 NTN 算法源码
-│  └─ web_ui/                    UI 内嵌 Web/Three.js 可视化页面
+│  ├─ python/
+│  ├─ cpp_cuda/
+│  ├─ matlab/
+│  └─ web_ui/
 ├─ scripts/
-│  ├─ powershell/                USRP、UHD、性能测试与批处理启动脚本
-│  ├─ batch_cmd/                 Windows bat/cmd 启动器
-│  ├─ matlab_entrypoints/        MATLAB 一键运行入口
-│  ├─ python_tools/              Python 辅助工具
-│  └─ shell_js/                  Shell/Node 辅助脚本
-├─ build_system/                 CMake/Visual Studio 构建入口
-├─ configs/                      UI、链路、模型更新和星历配置
-├─ data/code_matrices/           LDPC/Polar/WiMAX/DVB-S2 编码矩阵
+│  ├─ powershell/
+│  ├─ batch_cmd/
+│  ├─ matlab_entrypoints/
+│  ├─ python_tools/
+│  └─ shell_js/
+├─ build_system/
+├─ configs/
+├─ data/code_matrices/
 └─ performance_results/
-   ├─ figures/                   性能结果图
-   ├─ tables/                    汇总表和三线表
-   └─ tools/                     性能结果抽取/绘图脚本
+   ├─ figures/
+   ├─ tables/
+   └─ tools/
 ```
 
 ## Main Components
 
-- `source/python/UI_NEW/main.py`：当前主要 PySide6 UI，集成星地可视化、业务选择、模型更新、离线 GPU pipeline 与 USRP 控制入口。
-- `source/python/UI_NEW/model_update.py`：遥感 AI 模型更新包生成、切片、manifest 与接收端部署逻辑。
-- `source/cpp_cuda/uhd_cpp/src/uhd_ldpc_ofdm_link.cpp`：UHD LDPC-OFDM 收发链路核心实现。
-- `source/cpp_cuda/uhd_cpp/src/gpu_ofdm_pipeline.cu`：GPU OFDM pipeline。
-- `source/python/Ai_process_V2` 与 `source/python/Ai_process_V3`：遥感 AI 业务编码、ROI/语义层处理与 RSBF bitstream 工具。
-- `source/matlab/`：MATLAB 编译码、X310 链路调试与 NTN 相关算法。
+- `source/python/UI_NEW/main.py`: Main PySide6 UI for task selection, link control, model update, offline GPU pipeline control, and USRP experiment coordination.
+- `source/python/UI_NEW/usrp_sync_task.py`: Helper thread for UI-triggered USRP synchronization tasks.
+- `source/python/UI_NEW/model_update.py`: Model update package generation, chunking, manifest creation, and receiver-side deployment logic.
+- `source/cpp_cuda/uhd_cpp/src/uhd_ldpc_ofdm_link.cpp`: UHD LDPC-OFDM transceiver core.
+- `source/cpp_cuda/uhd_cpp/src/gpu_ofdm_pipeline.cu`: GPU OFDM pipeline implementation.
+- `source/python/Ai_process_V2` and `source/python/Ai_process_V3`: Remote-sensing AI payload coding, ROI/semantic-layer processing, and RSBF bitstream tools.
+- `source/matlab/`: MATLAB coding, X310 link debugging, and NTN-related algorithm prototypes.
 
-## Quick Start: UI
+## Quick Start
 
-Windows 下可直接从仓库根目录运行：
+On Windows, create the Python environment and launch the main UI from the repository root:
 
 ```powershell
 .\SETUP_UI_ENV.bat
 .\START_UI_NEW.bat
 ```
 
-也可以手动创建 Python 环境：
+Manual setup:
 
 ```powershell
 py -3.12 -m venv .venv
@@ -59,22 +123,22 @@ pip install -r requirements.txt
 python .\source\python\UI_NEW\main.py
 ```
 
-如果只启动 UI，可重点确认 `PySide6`、`pyqtgraph`、`matplotlib`、`PyOpenGL` 等依赖。遥感 AI/YOLO 流程还需要 `torch`、`ultralytics`、`opencv-python` 等包。
+For UI-only use, the most important packages are `PySide6`, `pyqtgraph`, `matplotlib`, and `PyOpenGL`. AI and YOLO workflows additionally require packages such as `torch`, `ultralytics`, and `opencv-python`.
 
 ## External Dependencies
 
-以下依赖与本机硬件/安装路径有关，不写入 `requirements.txt`：
+The following dependencies are machine-specific and are not installed through `requirements.txt`:
 
-- MATLAB R2024a 或更新版本，建议包含 Communications Toolbox、5G Toolbox、Satellite Communications Toolbox/Aerospace Toolbox、Instrument Control Toolbox。
-- Visual Studio 2022 C++ Build Tools。
-- CMake。
-- NVIDIA CUDA Toolkit，与本机 GPU 驱动匹配。
-- UHD 4.9.x、X310/NI-RIO 驱动与 FPGA images。
-- FFmpeg，用于视频封装、转码或 UI 视频桥接。
+- MATLAB R2024a or newer, preferably with Communications Toolbox, 5G Toolbox, Satellite Communications Toolbox or Aerospace Toolbox, and Instrument Control Toolbox.
+- Visual Studio 2022 C++ Build Tools.
+- CMake.
+- NVIDIA CUDA Toolkit matching the local GPU driver.
+- UHD 4.9.x, USRP X310 or NI-RIO drivers, and FPGA images.
+- FFmpeg for video packaging, transcoding, and UI video bridging.
 
 ## Environment Variables
 
-上传版代码已移除本机绝对路径，外部工具路径通过环境变量或命令行参数指定：
+The uploaded version avoids hardcoded machine-specific absolute paths. External tools can be configured through environment variables:
 
 ```powershell
 $env:PROJECT_ROOT = (Get-Location).Path
@@ -87,18 +151,18 @@ $env:TORCH_LIB_DIR = "<torch-lib-dir>"
 $env:MATLAB_EXE = "matlab"
 ```
 
-未设置这些变量时，UI 和脚本会尽量使用仓库相对路径；涉及 USRP、CUDA OSD、MATLAB 或 Torch 动态库的功能仍需本机正确安装对应依赖。
+If these variables are not set, scripts use repository-relative paths where possible. Hardware-dependent functions still require the corresponding local tools and drivers.
 
-## Build UHD C++/CUDA Link
+## Build The UHD C++/CUDA Link
 
-示例 CMake 配置：
+Example CMake workflow:
 
 ```powershell
 cmake -S .\build_system\uhd_cpp -B .\build\uhd_cpp -G "Visual Studio 17 2022" -A x64 -DUHD_ROOT="$env:UHD_ROOT"
 cmake --build .\build\uhd_cpp --config Release
 ```
 
-常用脚本位于：
+Useful scripts:
 
 ```text
 scripts/powershell/uhd_cpp/scripts/start_uhd_cpp_pair.ps1
@@ -107,25 +171,29 @@ scripts/powershell/uhd_cpp/scripts/run_codec_matrix_sweep.ps1
 scripts/powershell/uhd_cpp/scripts/run_usrp_gain_frame_sweep.ps1
 ```
 
-## Performance Results
+## Performance Artifacts
 
-`performance_results/` 中保留了论文/报告可直接引用的图表与汇总表：
+The `performance_results/` directory contains figures, tables, and scripts that summarize available prototype measurements.
 
-- `performance_results/figures/`：MATLAB 绘制的性能图。
-- `performance_results/tables/performance_three_line_tables.md`：GitHub 可读表格。
-- `performance_results/tables/performance_three_line_tables.tex`：LaTeX booktabs 三线表。
-- `performance_results/tools/`：结果抽取与绘图脚本。
+![Link and decoder performance](performance_results/figures/link_decoder_performance.png)
 
-重新生成表格和图：
+Additional artifacts:
+
+- `performance_results/figures/`: MATLAB-generated performance figures.
+- `performance_results/tables/performance_three_line_tables.md`: GitHub-readable summary tables.
+- `performance_results/tables/performance_three_line_tables.tex`: LaTeX booktabs tables.
+- `performance_results/tools/`: Extraction and plotting scripts.
+
+Regenerate tables and figures:
 
 ```powershell
 .\performance_results\tools\extract_performance_results.ps1
 matlab -batch "cd('performance_results/tools'); plot_performance_results;"
 ```
 
-## Data And Assets Policy
+## Data And Asset Policy
 
-为保证仓库可上传、可 clone，本次 Git 版本不包含以下大型或运行时文件：
+This GitHub version intentionally excludes large runtime artifacts, models, raw datasets, and generated logs:
 
 ```text
 data/media/
@@ -140,7 +208,7 @@ build/
 .venv/
 ```
 
-如果需要复现实验演示，可按需补充模型、视频和原始数据。模型文件建议使用 Git LFS 管理：
+If full reproduction of AI demonstrations is required, add the corresponding model files, videos, and raw datasets separately. Large model files should be managed with Git LFS:
 
 ```powershell
 git lfs install
@@ -150,6 +218,6 @@ git add .gitattributes
 
 ## Notes
 
-- 仓库根目录已提供 `.gitignore`，运行 UI、构建工程或生成测试结果后，`runtime/`、`generated/`、`build/`、虚拟环境和缓存不会被默认提交。
-- 上传版已对关键代码、脚本、CMake 和配置执行绝对路径扫描，避免依赖原始实验机的 Windows 盘符绝对路径。
-- 部分历史配置和性能表反映既有实验结果，不代表 clone 后无需硬件即可复现实测 USRP 链路。
+- The repository includes `.gitignore` rules for virtual environments, build output, runtime logs, and generated artifacts.
+- Key source files, scripts, CMake files, and configuration files have been checked to avoid machine-specific absolute path dependencies.
+- Hardware-in-the-loop USRP results require compatible local radio hardware, UHD drivers, and RF/clock configuration.
