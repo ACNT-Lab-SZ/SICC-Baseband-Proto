@@ -1,6 +1,6 @@
 # SICC Baseband Prototype
 
-![Integrated computing-communication baseband prototype for spaceborne intelligence](assets/readme/spaceborne_intelligent_baseband_title.png)
+![Integrated computing-communication baseband prototype for spaceborne intelligence](spaceborne_intelligent_baseband_title.png)
 
 SICC Baseband Prototype is a software-defined baseband transmission prototype for spaceborne intelligent systems. It explores how onboard AI workloads, adaptive link control, and baseband communication processing can share a unified GPU-centric execution path instead of being deployed as isolated computing and communication subsystems.
 
