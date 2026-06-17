@@ -91,6 +91,7 @@ These results indicate the feasibility and engineering basis of an integrated co
 └─ performance_results/
    ├─ figures/
    ├─ tables/
+   ├─ data/
    └─ tools/
 ```
 
@@ -173,23 +174,39 @@ scripts/powershell/uhd_cpp/scripts/run_usrp_gain_frame_sweep.ps1
 
 ## Performance Artifacts
 
-The `performance_results/` directory contains figures, tables, and scripts that summarize available prototype measurements.
+The `performance_results/` directory contains compact figures and tables that summarize the current measured baseband performance. Large raw logs are not part of this upload-oriented snapshot; source CSV/log paths are preserved in the table metadata where available.
 
-![Link and decoder performance](performance_results/figures/link_decoder_performance.png)
+### Pure GPU-Pipeline Results
 
-Additional artifacts:
+The following figures come from offline pure GPU-Pipeline runs. They summarize FER, effective throughput and frame latency without USRP hardware in the loop.
 
-- `performance_results/figures/`: MATLAB-generated performance figures.
-- `performance_results/tables/performance_three_line_tables.md`: GitHub-readable summary tables.
-- `performance_results/tables/performance_three_line_tables.tex`: LaTeX booktabs tables.
-- `performance_results/tools/`: Extraction and plotting scripts.
+![Pure GPU-Pipeline QPSK FER across code families](performance_results/figures/gpu_pipeline_fer_qpsk_all_codes.svg)
 
-Regenerate tables and figures:
+![Pure GPU-Pipeline 16QAM goodput and latency](performance_results/figures/gpu_pipeline_16qam_goodput_latency.svg)
 
-```powershell
-.\performance_results\tools\extract_performance_results.ps1
-matlab -batch "cd('performance_results/tools'); plot_performance_results;"
-```
+Associated data files:
+
+- `performance_results/data/gpu_pipeline_fer_qpsk_all_codes.csv`
+- `performance_results/data/gpu_pipeline_goodput_all_codes.csv`
+- `performance_results/data/gpu_pipeline_latency_all_codes.csv`
+
+### USRP Realtime Results
+
+The USRP table below is a curated subset of measured realtime runs. `FER = 0` means no frame errors were observed in the listed sample; it is not a claim of zero error probability.
+
+| Profile | PHY path | Modulation | FEC | Decoder | Rate (Msps) | Frames | FER | BER | FPS | Goodput (Mbps) | Avg frame latency (ms) |
+|---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|
+| Short-packet reliability | USRP realtime full-GPU RX | QPSK | CCSDS LDPC n128/k64 | CUDA BP-OSD | 25 | 59137 | 0 | 0 | 985.51 | 7.57 | 0.11 |
+| Stream reliability | USRP realtime full-GPU RX | QPSK | DVB-S2 short N16200 rate 1/2 | CUDA BP | 25 | 10656 | 0 | 0 | 177.52 | 10.22 | 1.47 |
+| Stream QPSK throughput | USRP realtime full-GPU RX | QPSK | DVB-S2 short N16200 rate 5/6 | CUDA BP | 25 | 10653 | 0 | 0 | 177.44 | 18.91 | n/a |
+| Stream 16QAM throughput | USRP realtime full-GPU RX | 16QAM | DVB-S2 short N16200 rate 5/6 | CUDA BP | 25 | 10622 | 9.414e-05 | 1.184e-07 | 176.94 | 37.71 | 2.02 |
+| 64QAM visible sample | USRP realtime full-GPU RX | 64QAM | DVB-S2 short N16200 rate 1/2 | CUDA BP | 25 | 870 | 0 | 0 | 172.95 | 29.89 | 2.06 |
+| Dual-USRP gated check | Two-USRP gated GPU pipeline | QPSK | DVB-S2 short N16200 rate 1/4 | CUDA BP | 12.5 | 3114 | 3.211e-04 | 0 | 110.72 | 1.43 | n/a |
+
+Source details and overflow notes are stored in:
+
+- `performance_results/tables/usrp_realtime_performance.md`
+- `performance_results/tables/usrp_realtime_performance.csv`
 
 ## Data And Asset Policy
 

@@ -1,54 +1,45 @@
-# Performance Results
+# Performance Artifacts
 
-本目录整理了当前工程中可识别的测试、验证、训练和链路性能结果。
+This directory keeps a compact set of measured baseband performance artifacts for the repository README. Large raw logs are intentionally not the primary display target here; source CSV/log paths are preserved in the data tables when available.
 
 ## Layout
 
 ```text
 performance_results/
-  raw/       原始结果文件副本，按结果类型归档
-  tables/    汇总 CSV、Markdown 表格、LaTeX booktabs 三线表
-  figures/   MATLAB 生成的性能结果图
-  tools/     可重复生成脚本
+  figures/   GPU-Pipeline performance figures and selected vector exports
+  tables/    GitHub-readable summary tables and CSV metadata
+  data/      Compact CSV data used by the displayed figures
+  raw/       Archived historical result snapshots, when included
+  tools/     Historical extraction and plotting scripts, when included
 ```
 
-## Figures
+## Displayed Figures
 
-- `figures/yolo_training_performance.png`：YOLO 检测训练指标，包括 best mAP、最终 precision/recall。
-- `figures/gpu_direct_roundtrip_performance.png`：GPU Direct roundtrip FPS 与平均 payload。
-- `figures/link_decoder_performance.png`：USRP 链路 goodput/FPS/译码耗时与 AWGN decoder BER/FER。
+- `figures/gpu_pipeline_fer_qpsk_all_codes.svg`: pure GPU-Pipeline QPSK FER curves across available code families.
+- `figures/gpu_pipeline_16qam_goodput_latency.svg`: pure GPU-Pipeline 16QAM effective throughput and frame latency.
 
-## Tables
+PNG/PDF companions are included where available for local viewing or document export:
 
-- `tables/performance_three_line_tables.md`：便于 GitHub 查看的一组汇总表。
-- `tables/performance_three_line_tables.tex`：LaTeX booktabs 三线表，可直接放入论文或报告。
-- `tables/yolo_training_summary.csv`：训练结果汇总。
-- `tables/gpu_direct_roundtrip_summary.csv`：GPU Direct/ROI roundtrip 汇总。
-- `tables/usrp_link_summary.csv`：USRP 链路实测汇总。
-- `tables/decoder_awgn_summary.csv`：decoder AWGN 汇总。
-- `tables/ui_metric_summary.csv`：UI metric JSON 汇总。
-- `tables/power_trace_summary.csv`：预测功率 trace 汇总。
-- `tables/result_file_inventory.csv`：纳入本次整理的原始结果文件索引。
+- `figures/gpu_pipeline_16qam_goodput_latency.png`
+- `figures/gpu_pipeline_fer_qpsk_all_codes.pdf`
+- `figures/gpu_pipeline_16qam_goodput_latency.pdf`
 
-## Current Highlights
+## Displayed Tables
 
-- Maritime ship detection: best mAP50 = 0.9861, best mAP50-95 = 0.7024.
-- Earthquake damage detection: best mAP50 = 0.8562, best mAP50-95 = 0.8562.
-- VISO ROI-layered payload saving: payload 从 1700 KB/frame 降至 907.87 KB/frame，检测数保持 5277。
-- USRP gated GPU pipeline: 14531 frames, FER = 0.009153, goodput = 0.69 Mbps, decode = 1.97 ms/frame.
-- OSD-only AWGN point: SNR = 3 dB, BER = 2.1875e-4, FER = 1.0e-3.
+- `tables/usrp_realtime_performance.md`: curated USRP realtime performance table.
+- `tables/usrp_realtime_performance.csv`: same rows with source paths and overflow notes.
 
-## Reproduce
+## Compact Data Sources
 
-在 PowerShell 中重新抽取表格：
+- `data/gpu_pipeline_fer_qpsk_all_codes.csv`
+- `data/gpu_pipeline_goodput_all_codes.csv`
+- `data/gpu_pipeline_latency_all_codes.csv`
+- `data/usrp_realtime_reliable_source.csv`
 
-```powershell
-cd <clone-root>
-.\performance_results\tools\extract_performance_results.ps1
-```
+## Interpretation Notes
 
-用 MATLAB 重新绘图：
+- `FER = 0` in the USRP table means no frame errors were observed within the listed sample.
+- The 64QAM row is a visible calibration sample and should not be treated as a long-run stability claim.
+- Pure GPU-Pipeline figures exclude USRP hardware effects such as RF impairment, synchronization misses and UHD overflow.
+- USRP rows include real hardware scheduling and RF behavior; compare them against offline GPU-Pipeline rows only with that distinction in mind.
 
-```powershell
-matlab -batch "cd('<clone-root>/performance_results/tools'); plot_performance_results;"
-```
