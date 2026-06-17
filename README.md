@@ -182,6 +182,7 @@ The following figures come from offline pure GPU-Pipeline runs. They summarize F
 
 ![Pure GPU-Pipeline QPSK FER across code families](performance_results/figures/gpu_pipeline_fer_qpsk_all_codes.svg)
 
+![Pure GPU-Pipeline 16QAM goodput and latency](performance_results/figures/gpu_pipeline_16qam_goodput_latency.svg)
 
 Associated data files:
 
