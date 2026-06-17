@@ -178,17 +178,15 @@ The `performance_results/` directory contains compact figures and tables that su
 
 ### Pure GPU-Pipeline Results
 
-The following figures come from offline pure GPU-Pipeline runs. They summarize FER, effective throughput and frame latency without USRP hardware in the loop.
+The following figures come from offline pure GPU-Pipeline runs. They summarize FER and effective throughput  without USRP hardware in the loop.
 
 ![Pure GPU-Pipeline QPSK FER across code families](performance_results/figures/gpu_pipeline_fer_qpsk_all_codes.svg)
 
-![Pure GPU-Pipeline 16QAM goodput and latency](performance_results/figures/gpu_pipeline_16qam_goodput_latency.svg)
 
 Associated data files:
 
 - `performance_results/data/gpu_pipeline_fer_qpsk_all_codes.csv`
 - `performance_results/data/gpu_pipeline_goodput_all_codes.csv`
-- `performance_results/data/gpu_pipeline_latency_all_codes.csv`
 
 ### USRP Realtime Results
 
