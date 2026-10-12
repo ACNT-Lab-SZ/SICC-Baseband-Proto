@@ -1,8 +1,8 @@
-# SICC Baseband Prototype
+# SICC: A GPU-native integrated computing and communications prototype for spaceborne intelligence
 
 ![Integrated computing-communication baseband prototype for spaceborne intelligence](spaceborne_intelligent_baseband_title.png)
 
-SICC Baseband Prototype is a software-defined baseband transmission prototype for spaceborne intelligent systems. It explores how onboard AI workloads, adaptive link control, and baseband communication processing can share a unified GPU-centric execution path instead of being deployed as isolated computing and communication subsystems.
+SICC is a software-defined baseband transmission prototype for spaceborne intelligent systems. It explores how onboard AI workloads, adaptive link control, and baseband communication processing can share a unified GPU-centric execution path instead of being deployed as isolated computing and communication subsystems.
 
 The prototype targets integrated communication-computing scenarios such as remote-sensing video and image downlink, target detection, telemetry and telecommand, semantic feature transmission, and model update delivery. The central idea is to reduce repeated cross-architecture data movement and make semantic payload information, link state, coded bits, modulation symbols, LLR soft information, and decoding results available within a continuous GPU-native data path.
 
